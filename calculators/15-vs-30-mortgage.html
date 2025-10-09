@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 vs 30 Year Mortgage Calculator - Loan Term Comparison | Finance CalcFest</title>
+    <meta name="description" content="Compare 15-year vs 30-year mortgage payments, total interest, and savings. Find the optimal loan term for your financial situation.">
+    <link rel="canonical" href="https://calcfest.com/calculators/15-vs-30-mortgage.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="15 vs 30 Year Mortgage Calculator - Loan Term Comparison">
+    <meta property="og:description" content="Compare mortgage loan terms side-by-side. See payment differences, total interest, and break-even analysis.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/15-vs-30-mortgage.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "15 vs 30 Year Mortgage Calculator",
+        "description": "Compare 15-year and 30-year mortgage loan terms with payment analysis and total cost comparison",
+        "url": "https://calcfest.com/calculators/15-vs-30-mortgage.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors flex items-center">
+                            Calculators
+                            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="absolute top-full left-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="p-4 grid grid-cols-1 gap-4">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Mortgage & Loans</h3>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/mortgage-payment.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Mortgage Payment</a>
+                                        <a href="/calculators/biweekly-mortgage.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Biweekly Mortgage</a>
+                                        <a href="/calculators/extra-payment.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Extra Payment</a>
+                                        <a href="/calculators/15-vs-30-mortgage.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">15 vs 30 Year</a>
+                                        <a href="/calculators/amortization-schedule.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Amortization Schedule</a>
+                                        <a href="/calculators/home-affordability.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Home Affordability</a>
+                                        <a href="/calculators/rent-vs-buy.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Rent vs Buy</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Real Estate Investment</h3>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/cash-flow.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Property Cash Flow</a>
+                                        <a href="/calculators/cap-rate.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Cap Rate Calculator</a>
+                                        <a href="/calculators/roi.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">ROI Calculator</a>
+                                        <a href="/calculators/brrrr.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">BRRRR Calculator</a>
+                                        <a href="/calculators/fix-flip.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Fix & Flip Calculator</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 dark:border-gray-700 p-4">
+                                <a href="/calculators/" class="text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">View All Calculators →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-4 py-3 space-y-3">
+                <a href="/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">Home</a>
+                <a href="/calculators/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">All Calculators</a>
+                <a href="/about.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">About</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-4 h-12 text-sm">
+                <a href="/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Home</a>
+                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <a href="/calculators/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Calculators</a>
+                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-gray-900 dark:text-white font-medium">15 vs 30 Year Mortgage</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                15 vs 30 Year Mortgage Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Compare 15-year and 30-year mortgage loan terms side-by-side. See payment differences, 
+                total interest costs, and determine which loan term is right for your financial situation.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Calculator Input -->
+            <div class="lg:col-span-2">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Loan Information</h2>
+                    
+                    <form id="mortgageComparisonForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="loanAmount" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Loan Amount
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                    <input type="text" id="loanAmount" name="loanAmount" 
+                                           class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                           placeholder="300,000" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="interestRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Interest Rate
+                                </label>
+                                <div class="relative">
+                                    <input type="number" id="interestRate" name="interestRate" 
+                                           class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                           placeholder="6.5" min="0.1" max="20" step="0.01" required>
+                                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Optional: Different rates for 15 vs 30 year -->
+                        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
+                            <div class="flex items-center mb-3">
+                                <input type="checkbox" id="differentRates" name="differentRates" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="differentRates" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Use different interest rates for each term
+                                </label>
+                            </div>
+                            
+                            <div id="separateRatesSection" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="rate15" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        15-Year Rate
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" id="rate15" name="rate15" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="6.25" min="0.1" max="20" step="0.01">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="rate30" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        30-Year Rate
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" id="rate30" name="rate30" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="6.75" min="0.1" max="20" step="0.01">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl">
+                            Compare Loan Terms
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Quick Comparison -->
+            <div class="lg:col-span-1">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Quick Comparison</h3>
+                    
+                    <div id="quickResults" class="space-y-6">
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                            </svg>
+                            <p>Enter loan details to see term comparison</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Comparison -->
+        <div id="detailedComparison" class="mt-12 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-8">Detailed Loan Term Comparison</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- 30-Year Mortgage -->
+                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                            <span class="w-4 h-4 bg-blue-500 rounded-full mr-3"></span>
+                            30-Year Mortgage
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600 dark:text-gray-400">Monthly Payment:</span>
+                                <span id="payment30" class="text-xl font-bold text-gray-900 dark:text-white">$1,798</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Total Interest:</span>
+                                <span id="interest30" class="font-medium text-red-600 dark:text-red-400">$347,220</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Total Paid:</span>
+                                <span id="total30" class="font-medium text-gray-900 dark:text-white">$647,220</span>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-blue-200 dark:border-blue-700">
+                                <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">Interest Rate:</div>
+                                <div id="rate30Display" class="text-lg font-semibold text-blue-600 dark:text-blue-400">6.50%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 15-Year Mortgage -->
+                    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                            <span class="w-4 h-4 bg-green-500 rounded-full mr-3"></span>
+                            15-Year Mortgage
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600 dark:text-gray-400">Monthly Payment:</span>
+                                <span id="payment15" class="text-xl font-bold text-gray-900 dark:text-white">$2,613</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Total Interest:</span>
+                                <span id="interest15" class="font-medium text-green-600 dark:text-green-400">$170,340</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Total Paid:</span>
+                                <span id="total15" class="font-medium text-gray-900 dark:text-white">$470,340</span>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-green-200 dark:border-green-700">
+                                <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">Interest Rate:</div>
+                                <div id="rate15Display" class="text-lg font-semibold text-green-600 dark:text-green-400">6.50%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Savings Analysis -->
+                <div class="mt-8 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/10 dark:to-green-800/10 rounded-lg p-6 border border-green-200 dark:border-green-800">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center">15-Year Mortgage Benefits</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Interest Savings</p>
+                            <p id="interestSavings" class="text-2xl font-bold text-green-600 dark:text-green-400">$176,880</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Extra Monthly Payment</p>
+                            <p id="extraMonthly" class="text-2xl font-bold text-blue-600 dark:text-blue-400">$815</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Years Saved</p>
+                            <p id="yearsSaved" class="text-2xl font-bold text-green-600 dark:text-green-400">15 years</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Break-Even Analysis -->
+                <div class="mt-8 bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Investment Opportunity Analysis</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        If you invested the extra monthly payment (<span id="extraMonthlyInvest" class="font-semibold">$815</span>) instead of paying down the mortgage:
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
+                            <div class="text-sm text-gray-500 dark:text-gray-400">At 7% annual return:</div>
+                            <div id="investment7" class="text-lg font-bold text-purple-600 dark:text-purple-400">$548,230</div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
+                            <div class="text-sm text-gray-500 dark:text-gray-400">At 8% annual return:</div>
+                            <div id="investment8" class="text-lg font-bold text-purple-600 dark:text-purple-400">$631,745</div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
+                            <div class="text-sm text-gray-500 dark:text-gray-400">At 10% annual return:</div>
+                            <div id="investment10" class="text-lg font-bold text-purple-600 dark:text-purple-400">$852,470</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">15-Year vs 30-Year Mortgage: Which is Right for You?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">15-Year Mortgage Advantages</h3>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Massive interest savings:</strong> Often $100k-200k+ less in total interest</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Faster equity building:</strong> Own your home outright in half the time</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Lower interest rates:</strong> Typically 0.25-0.75% lower than 30-year</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Forced savings:</strong> Builds wealth through required higher payments</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">30-Year Mortgage Advantages</h3>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Lower monthly payments:</strong> More affordable monthly cash flow</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Investment opportunities:</strong> Invest difference for potentially higher returns</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Financial flexibility:</strong> More room for emergencies and life changes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Tax advantages:</strong> Longer period of mortgage interest deductions</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-amber-50 dark:bg-amber-900/20 rounded-lg p-6 border border-amber-200 dark:border-amber-800">
+                <h3 class="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-3">💡 Decision Framework</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-green-700 dark:text-green-300 mb-2">Choose 15-Year If:</h4>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li>• You can comfortably afford higher payments</li>
+                            <li>• You're risk-averse and prefer guaranteed savings</li>
+                            <li>• You're closer to retirement</li>
+                            <li>• You want to be debt-free faster</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Choose 30-Year If:</h4>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li>• You want maximum cash flow flexibility</li>
+                            <li>• You're confident in investment returns >7%</li>
+                            <li>• You have other high-interest debt</li>
+                            <li>• You're early in your career</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold">Finance CalcFest</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Professional financial calculators for informed decision making. Calculate everything from mortgages to investment returns.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Mortgage Calculators</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/mortgage-payment.html" class="text-gray-400 hover:text-white transition-colors">Mortgage Payment</a></li>
+                        <li><a href="/calculators/biweekly-mortgage.html" class="text-gray-400 hover:text-white transition-colors">Biweekly Mortgage</a></li>
+                        <li><a href="/calculators/extra-payment.html" class="text-gray-400 hover:text-white transition-colors">Extra Payment</a></li>
+                        <li><a href="/calculators/15-vs-30-mortgage.html" class="text-gray-400 hover:text-white transition-colors">15 vs 30 Year</a></li>
+                        <li><a href="/calculators/home-affordability.html" class="text-gray-400 hover:text-white transition-colors">Home Affordability</a></li>
+                        <li><a href="/calculators/amortization-schedule.html" class="text-gray-400 hover:text-white transition-colors">Amortization Schedule</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/" class="text-gray-400 hover:text-white transition-colors">All Calculators</a></li>
+                        <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 Finance CalcFest. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm mt-2 md:mt-0">
+                        Calculations are estimates. Consult a financial advisor for personalized advice.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/15-vs-30-mortgage.js" defer></script>
+</body>
+</html>

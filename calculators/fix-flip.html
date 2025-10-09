@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix & Flip Calculator - House Flipping Profit & ROI Analysis | Finance CalcFest</title>
+    <meta name="description" content="Calculate house flipping profits, ROI, and total costs with our comprehensive fix & flip calculator. Analyze purchase price, renovation costs, holding expenses, and sale profits.">
+    <link rel="canonical" href="https://calcfest.com/calculators/fix-flip.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Fix & Flip Calculator - House Flipping Profit Analysis">
+    <meta property="og:description" content="Professional fix & flip calculator for real estate investors. Calculate renovation costs, holding expenses, and profit margins.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/fix-flip.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Fix & Flip Calculator",
+        "description": "Calculate house flipping profits, renovation costs, holding expenses, and ROI for real estate investment properties",
+        "url": "https://calcfest.com/calculators/fix-flip.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors flex items-center">
+                            Calculators
+                            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="absolute top-full left-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="p-4 grid grid-cols-1 gap-4">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Mortgage & Loans</h3>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/mortgage-payment.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Mortgage Payment</a>
+                                        <a href="/calculators/amortization-schedule.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Amortization Schedule</a>
+                                        <a href="/calculators/home-affordability.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Home Affordability</a>
+                                        <a href="/calculators/rent-vs-buy.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Rent vs Buy</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Real Estate Investment</h3>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/cash-flow.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Property Cash Flow</a>
+                                        <a href="/calculators/cap-rate.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Cap Rate Calculator</a>
+                                        <a href="/calculators/roi.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">ROI Calculator</a>
+                                        <a href="/calculators/brrrr.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">BRRRR Calculator</a>
+                                        <a href="/calculators/fix-flip.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Fix & Flip Calculator</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 dark:border-gray-700 p-4">
+                                <a href="/calculators/" class="text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">View All Calculators →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-4 py-3 space-y-3">
+                <a href="/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">Home</a>
+                <a href="/calculators/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">All Calculators</a>
+                <a href="/about.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">About</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-4 h-12 text-sm">
+                <a href="/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Home</a>
+                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <a href="/calculators/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Calculators</a>
+                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-gray-900 dark:text-white font-medium">Fix & Flip Calculator</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Fix & Flip Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Analyze house flipping profits, renovation costs, holding expenses, and ROI. 
+                Calculate your potential returns before making investment decisions.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Calculator Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <form id="fixFlipForm" class="space-y-8">
+                        <!-- Acquisition Section -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full flex items-center justify-center mr-3 text-sm font-bold">1</div>
+                                Property Acquisition
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="purchasePrice" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Purchase Price
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="purchasePrice" name="purchasePrice" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="250,000" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="closingCosts" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Closing Costs
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="closingCosts" name="closingCosts" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="7,500">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="inspectionAppraisal" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Inspection & Appraisal
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="inspectionAppraisal" name="inspectionAppraisal" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="1,200">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="otherAcquisition" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Other Acquisition Costs
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="otherAcquisition" name="otherAcquisition" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="2,000">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Renovation Section -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 rounded-full flex items-center justify-center mr-3 text-sm font-bold">2</div>
+                                Renovation Costs
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="renovationBudget" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Base Renovation Budget
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="renovationBudget" name="renovationBudget" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="50,000" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="contingencyRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Contingency Buffer (%)
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" id="contingencyRate" name="contingencyRate" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="15" min="0" max="50" step="1" value="15">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="permits" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Permits & Licenses
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="permits" name="permits" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="3,000">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="materials" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Additional Materials
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="materials" name="materials" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="5,000">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Holding Costs Section -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+                                <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 rounded-full flex items-center justify-center mr-3 text-sm font-bold">3</div>
+                                Holding Costs
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="holdingPeriod" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Holding Period (months)
+                                    </label>
+                                    <input type="number" id="holdingPeriod" name="holdingPeriod" 
+                                           class="w-full pl-4 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                           placeholder="6" min="1" max="36" step="1" value="6" required>
+                                </div>
+                                <div>
+                                    <label for="interestRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Interest Rate (Annual %)
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" id="interestRate" name="interestRate" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="8.5" min="0" max="30" step="0.1" value="8.5">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="propertyTaxes" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Property Taxes (Monthly)
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="propertyTaxes" name="propertyTaxes" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="400">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="insurance" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Insurance (Monthly)
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="insurance" name="insurance" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="150">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="utilities" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Utilities (Monthly)
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="utilities" name="utilities" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="200">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="otherHolding" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Other Monthly Costs
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="otherHolding" name="otherHolding" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sale Section -->
+                        <div>
+                            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+                                <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900 text-orange-600 dark:text-orange-300 rounded-full flex items-center justify-center mr-3 text-sm font-bold">4</div>
+                                Property Sale
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="salePrice" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Expected Sale Price (ARV)
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="salePrice" name="salePrice" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="350,000" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="realtorCommission" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Realtor Commission (%)
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" id="realtorCommission" name="realtorCommission" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="6" min="0" max="10" step="0.5" value="6">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="sellingCosts" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Closing/Legal Costs
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="sellingCosts" name="sellingCosts" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="3,000">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="otherSelling" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Other Selling Costs
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="otherSelling" name="otherSelling" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="1,500">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calculate Button -->
+                        <div class="pt-6">
+                            <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl">
+                                Calculate Fix & Flip Analysis
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="lg:col-span-1">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Fix & Flip Analysis</h3>
+                    
+                    <div id="calculationResults" class="space-y-6">
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 000 2h.01a1 1 0 000-2H7z" clip-rule="evenodd"/>
+                            </svg>
+                            <p>Enter property details to see your fix & flip analysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Fix & Flip Investment Guide</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Key Success Factors</h3>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>70% Rule:</strong> Purchase price + renovation costs ≤ 70% of ARV</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Accurate ARV:</strong> Use recent comparable sales in the area</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Contingency Buffer:</strong> Plan for 15-20% cost overruns</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Speed is Key:</strong> Minimize holding time to reduce costs</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Common Pitfalls</h3>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Over-Improving:</strong> Don't renovate beyond neighborhood standards</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Underestimating Costs:</strong> Hidden issues can blow budgets</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Wrong Location:</strong> Choose areas with strong buyer demand</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Extended Timeline:</strong> Holding costs can eliminate profits</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold">Finance CalcFest</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Professional financial calculators for informed decision making. Calculate everything from mortgages to investment returns.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Related Calculators</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/brrrr.html" class="text-gray-400 hover:text-white transition-colors">BRRRR Calculator</a></li>
+                        <li><a href="/calculators/cap-rate.html" class="text-gray-400 hover:text-white transition-colors">Cap Rate Calculator</a></li>
+                        <li><a href="/calculators/cash-flow.html" class="text-gray-400 hover:text-white transition-colors">Cash Flow Calculator</a></li>
+                        <li><a href="/calculators/roi.html" class="text-gray-400 hover:text-white transition-colors">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/" class="text-gray-400 hover:text-white transition-colors">All Calculators</a></li>
+                        <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 Finance CalcFest. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm mt-2 md:mt-0">
+                        Investment calculations are estimates. Consult professionals for investment decisions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/fix-flip.js" defer></script>
+</body>
+</html>

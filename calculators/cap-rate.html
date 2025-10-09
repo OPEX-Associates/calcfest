@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cap Rate Calculator - Capitalization Rate Analysis | Finance CalcFest</title>
+    <meta name="description" content="Calculate cap rate for investment properties. Free capitalization rate calculator for real estate investors to analyze property returns and investment potential.">
+    <link rel="canonical" href="https://calcfest.com/calculators/cap-rate.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Cap Rate Calculator - Real Estate Investment Analysis">
+    <meta property="og:description" content="Calculate capitalization rate for investment properties. Essential tool for real estate investors.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/cap-rate.html">
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- Fallback CSS for consistent styling -->
+    <style>
+        /* Ensure input fields have consistent borders across all themes */
+        input[type="number"], input[type="text"], input[type="range"], select {
+            border: 1px solid #d1d5db !important; /* gray-300 */
+        }
+        
+        .dark input[type="number"], .dark input[type="text"], .dark input[type="range"], .dark select {
+            border: 1px solid #6b7280 !important; /* gray-500 */
+            background-color: #374151 !important; /* gray-700 */
+            color: #f9fafb !important; /* gray-50 */
+        }
+        
+        input[type="number"]:focus, input[type="text"]:focus, input[type="range"]:focus, select:focus {
+            border-color: #3b82f6 !important; /* blue-500 */
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+        }
+        
+        .dark input[type="number"]:focus, .dark input[type="text"]:focus, .dark input[type="range"]:focus, .dark select:focus {
+            border-color: #60a5fa !important; /* blue-400 */
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1) !important;
+        }
+    </style>
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Cap Rate Calculator",
+        "description": "Calculate capitalization rate for real estate investment properties",
+        "url": "https://calcfest.com/calculators/cap-rate.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "Finance CalcFest"
+        }
+    }
+    </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/index.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">FC</span>
+                        </div>
+                        <span class="font-bold text-xl text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/calculators/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Calculators
+                    </a>
+                    <a href="/about.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        About
+                    </a>
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path class="hidden dark:block" d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                            <path class="dark:hidden" d="M10 2L13.09 8.26L20 9L14 14.74L15.18 21.02L10 17.77L4.82 21.02L6 14.74L0 9L6.91 8.26L10 2Z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="md:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Cap Rate Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Calculate the capitalization rate for investment properties to evaluate potential returns and compare investment opportunities.
+            </p>
+        </div>
+
+        <!-- Calculator Layout -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Input Section -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Property Information</h2>
+                
+                <div class="space-y-6">
+                    <!-- Property Value -->
+                    <div>
+                        <label for="propertyValue" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Property Value
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input 
+                                type="number" 
+                                id="propertyValue" 
+                                class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                                placeholder="300,000"
+                                min="1000"
+                                step="1000"
+                            >
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Current market value or purchase price</p>
+                    </div>
+
+                    <!-- Annual Rental Income -->
+                    <div>
+                        <label for="annualRent" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Annual Rental Income
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input 
+                                type="number" 
+                                id="annualRent" 
+                                class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                                placeholder="30,000"
+                                min="1000"
+                                step="100"
+                            >
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Gross annual rental income</p>
+                    </div>
+
+                    <!-- Annual Operating Expenses -->
+                    <div>
+                        <label for="operatingExpenses" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Annual Operating Expenses
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input 
+                                type="number" 
+                                id="operatingExpenses" 
+                                class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                                placeholder="8,000"
+                                min="0"
+                                step="100"
+                            >
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Property taxes, insurance, maintenance, management fees</p>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <button 
+                        id="calculateBtn"
+                        class="w-full bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-600 hover:to-accent-600 transition-all transform hover:scale-105 shadow-lg"
+                    >
+                        Calculate Cap Rate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Cap Rate Analysis</h2>
+                
+                <div id="results">
+                    <!-- Cap Rate Display -->
+                    <div class="bg-gradient-to-br from-accent-50 to-accent-100 dark:from-gray-700 dark:to-gray-600 border border-accent-200 dark:border-gray-600 rounded-xl p-6 text-center mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Capitalization Rate</h3>
+                        <p id="capRateResult" class="text-4xl font-bold text-accent-600 dark:text-accent-400">7.3%</p>
+                        <p id="capRateRating" class="text-sm text-gray-600 dark:text-gray-400 mt-2">Good Investment</p>
+                    </div>
+
+                    <!-- Calculation Breakdown -->
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-gray-900 dark:text-white">Calculation Breakdown</h4>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Annual Rental Income</span>
+                                <span id="incomeDisplay" class="font-bold text-lg text-green-600 dark:text-green-400">$30,000</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Annual Operating Expenses</span>
+                                <span id="expensesDisplay" class="font-bold text-lg text-red-600 dark:text-red-400">$8,000</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Net Operating Income (NOI)</span>
+                                <span id="noiDisplay" class="font-bold text-lg text-accent-600 dark:text-accent-400">$22,000</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Property Value</span>
+                                <span id="valueDisplay" class="font-bold text-lg text-gray-900 dark:text-white">$300,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cap Rate Guidelines -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mt-6">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Cap Rate Guidelines</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Excellent (8%+):</span>
+                                <span class="font-medium text-green-600 dark:text-green-400">High return, higher risk</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Good (6-8%):</span>
+                                <span class="font-medium text-accent-600 dark:text-accent-400">Balanced return and risk</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Fair (4-6%):</span>
+                                <span class="font-medium text-yellow-600 dark:text-yellow-400">Lower return, safer investment</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Poor (<4%):</span>
+                                <span class="font-medium text-red-600 dark:text-red-400">Low return, may not be profitable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Understanding Cap Rate</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">What is Cap Rate?</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        The capitalization rate (cap rate) is a key metric used in real estate investment to evaluate the potential return on investment. It's calculated by dividing the Net Operating Income (NOI) by the property value.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        <strong>Formula:</strong> Cap Rate = (NOI ÷ Property Value) × 100
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">How to Use Cap Rate</h3>
+                    <ul class="text-gray-600 dark:text-gray-300 space-y-2">
+                        <li>• <strong>Compare Properties:</strong> Use cap rates to compare similar investment opportunities</li>
+                        <li>• <strong>Assess Risk:</strong> Higher cap rates typically indicate higher risk but higher potential returns</li>
+                        <li>• <strong>Market Analysis:</strong> Compare your property's cap rate to local market averages</li>
+                        <li>• <strong>Investment Decisions:</strong> Set minimum cap rate thresholds for your investment criteria</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">FC</span>
+                        </div>
+                        <span class="font-bold text-xl text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Professional financial calculators for smart investment decisions. Free, accurate, and easy to use.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Calculators</h3>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                        <li><a href="/calculators/mortgage-payment.html" class="hover:text-primary-600 dark:hover:text-primary-400">Mortgage Payment</a></li>
+                        <li><a href="/calculators/affordability.html" class="hover:text-primary-600 dark:hover:text-primary-400">Home Affordability</a></li>
+                        <li><a href="/calculators/cash-flow.html" class="hover:text-primary-600 dark:hover:text-primary-400">Cash Flow</a></li>
+                        <li><a href="/calculators/cap-rate.html" class="hover:text-primary-600 dark:hover:text-primary-400">Cap Rate</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                        <li><a href="/about.html" class="hover:text-primary-600 dark:hover:text-primary-400">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-primary-600 dark:hover:text-primary-400">Contact</a></li>
+                        <li><a href="/privacy.html" class="hover:text-primary-600 dark:hover:text-primary-400">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center text-gray-600 dark:text-gray-300">
+                <p>&copy; 2024 Finance CalcFest. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/cap-rate.js"></script>
+</body>
+</html>

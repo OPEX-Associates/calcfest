@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Affordability Calculator - How Much House Can I Afford? | Finance CalcFest</title>
+    <meta name="description" content="Calculate how much house you can afford based on your income, debt, and down payment. Free home affordability calculator with accurate debt-to-income ratios.">
+    <link rel="canonical" href="https://calcfest.com/calculators/home-affordability.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Home Affordability Calculator - Free & Accurate">
+    <meta property="og:description" content="Find out how much house you can afford based on your income, expenses, and financial situation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/home-affordability.html">
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Home Affordability Calculator",
+        "description": "Calculate how much house you can afford based on income, debt, and down payment",
+        "url": "https://calcfest.com/calculators/home-affordability.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "Finance CalcFest"
+        }
+    }
+    </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <a href="/calculators/" class="text-primary-600 dark:text-primary-400 font-medium">Calculators</a>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 dark:bg-gray-800 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Home</a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <a href="/calculators/" class="ml-1 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Calculators</a>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="ml-1 text-gray-500 dark:text-gray-400">Home Affordability Calculator</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Home Affordability Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Discover how much house you can afford based on your income, debt, down payment, and current interest rates. 
+                Get pre-qualified estimates with professional debt-to-income calculations.
+            </p>
+        </div>
+
+        <!-- Calculator Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Input Form -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Your Financial Information</h2>
+                
+                <form id="affordabilityForm" data-calculator="home-affordability" class="space-y-6">
+                    <div class="form-group">
+                        <label for="annualIncome" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Annual Gross Income
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-500">$</span>
+                            <input type="number" id="annualIncome" name="annualIncome" 
+                                   class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="75000" min="0" max="10000000" required>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Your total yearly income before taxes</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="monthlyDebt" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Monthly Debt Payments
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-500">$</span>
+                            <input type="number" id="monthlyDebt" name="monthlyDebt" 
+                                   class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="500" min="0" max="100000">
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Credit cards, auto loans, student loans, etc.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="downPayment" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Down Payment Available
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-500">$</span>
+                            <input type="number" id="downPayment" name="downPayment" 
+                                   class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="50000" min="0" max="5000000">
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Cash available for down payment</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interestRate" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Interest Rate
+                        </label>
+                        <div class="relative">
+                            <input type="number" id="interestRate" name="interestRate" 
+                                   class="w-full pr-8 pl-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="6.5" min="0" max="50" step="0.01" required>
+                            <span class="absolute right-3 top-3 text-gray-500">%</span>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Current mortgage interest rate</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanTerm" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Loan Term
+                        </label>
+                        <select id="loanTerm" name="loanTerm" 
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <option value="30">30 years</option>
+                            <option value="25">25 years</option>
+                            <option value="20">20 years</option>
+                            <option value="15">15 years</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label for="propertyTaxRate" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Property Tax Rate
+                            </label>
+                            <div class="relative">
+                                <input type="number" id="propertyTaxRate" name="propertyTaxRate" 
+                                       class="w-full pr-8 pl-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                       value="1.5" min="0" max="10" step="0.1">
+                                <span class="absolute right-3 top-3 text-gray-500">%</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="homeInsurance" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Home Insurance (Annual)
+                            </label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-3 text-gray-500">$</span>
+                                <input type="number" id="homeInsurance" name="homeInsurance" 
+                                       class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                       value="1200" min="0" max="50000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dtiRatio" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Maximum Debt-to-Income Ratio
+                        </label>
+                        <div class="mb-2 text-center">
+                            <span class="text-lg font-semibold text-gray-900 dark:text-white">
+                                <span id="dtiValue">28</span>%
+                            </span>
+                        </div>
+                        <div class="relative">
+                            <input type="range" id="dtiRatio" name="dtiRatio" 
+                                   class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                                   value="28" min="20" max="50" step="1">
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            <span>Conservative (20%)</span>
+                            <span>Aggressive (50%)</span>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Recommended: 28% for front-end DTI</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50">
+                        Calculate Affordability
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Affordability Results</h2>
+                
+                <div id="results" class="space-y-4">
+                    <div class="bg-gradient-to-br from-accent-50 to-accent-100 dark:from-gray-700 dark:to-gray-600 border border-accent-200 dark:border-gray-600 rounded-xl p-6 text-center">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Maximum Home Price</h3>
+                        <p id="maxHomePrice" class="text-4xl font-bold text-accent-600 dark:text-accent-400">$325,000</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-primary-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Loan Amount</h4>
+                            <p id="loanAmount" class="text-xl font-bold text-primary-600 dark:text-primary-400">$275,000</p>
+                        </div>
+                        <div class="bg-primary-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+                            <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Monthly Payment</h4>
+                            <p id="monthlyPayment" class="text-xl font-bold text-primary-600 dark:text-primary-400">$1,833</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-gray-900 dark:text-white">Payment Breakdown</h4>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Principal & Interest</span>
+                            <span id="principalInterest" class="font-medium text-gray-900 dark:text-white">$1,833</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Property Tax</span>
+                            <span id="monthlyPropertyTax" class="font-medium text-gray-900 dark:text-white">$406</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Home Insurance</span>
+                            <span id="monthlyInsurance" class="font-medium text-gray-900 dark:text-white">$100</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Total PITI</span>
+                            <span id="totalPITI" class="font-bold text-lg text-gray-900 dark:text-white">$2,339</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-3">DTI Analysis</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600 dark:text-gray-400">Front-end DTI:</span>
+                                <span id="frontEndDTI" class="font-medium text-gray-900 dark:text-white">28.0%</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600 dark:text-gray-400">Back-end DTI:</span>
+                                <span id="backEndDTI" class="font-medium text-gray-900 dark:text-white">34.0%</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600 dark:text-gray-400">Available Monthly Income:</span>
+                                <span id="remainingIncome" class="font-medium text-gray-900 dark:text-white">$4,161</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Slot -->
+        <div class="ad-slot bg-gray-100 dark:bg-gray-800 py-8 mb-8">
+            <div class="bg-white dark:bg-gray-700 rounded-lg p-8 text-center border-2 border-dashed border-gray-300 dark:border-gray-600">
+                <p class="text-gray-500 dark:text-gray-400">Advertisement Space</p>
+            </div>
+        </div>
+
+        <!-- How It Works Section -->
+        <section class="bg-gray-50 dark:bg-gray-900 py-12 rounded-xl mb-8">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How Home Affordability is Calculated</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Key Calculations</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Monthly Income</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 font-mono">Annual Income ÷ 12</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Max Housing Payment</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 font-mono">Monthly Income × DTI Ratio</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Max Home Price</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 font-mono">(Loan Amount + Down Payment)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">DTI Ratios Explained</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 bg-primary-500 rounded-full mt-2 mr-3"></div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 dark:text-white">Front-End DTI</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Housing expenses ÷ Gross income. Recommended max: 28%</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 bg-accent-500 rounded-full mt-2 mr-3"></div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 dark:text-white">Back-End DTI</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">All debt payments ÷ Gross income. Recommended max: 36%</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full mt-2 mr-3"></div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 dark:text-white">PITI Components</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Principal, Interest, Taxes, Insurance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">
+                        💡 Important Considerations
+                    </h3>
+                    <ul class="space-y-2 text-sm text-blue-800 dark:text-blue-200">
+                        <li>• This calculator provides estimates based on traditional lending guidelines</li>
+                        <li>• Actual loan approval depends on credit score, employment history, and other factors</li>
+                        <li>• Consider additional costs like HOA fees, maintenance, and utilities</li>
+                        <li>• It's wise to stay below maximum DTI ratios for financial flexibility</li>
+                        <li>• Interest rates and lending standards vary by lender and loan program</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Calculators -->
+        <section class="bg-white dark:bg-gray-800 py-12 rounded-xl">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Related Calculators</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Mortgage Payment Calculator</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Calculate exact monthly payments for a specific loan amount.</p>
+                        <a href="/calculators/mortgage-payment.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Calculate Payment →</a>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Debt-to-Income Calculator</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Calculate your current DTI ratio and see how it affects loan approval.</p>
+                        <a href="/calculators/debt-to-income.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Check DTI →</a>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Rent vs Buy Calculator</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Compare the costs of renting versus buying a home.</p>
+                        <a href="/calculators/rent-vs-buy.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Compare Options →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">FC</span>
+                    </div>
+                    <span class="text-xl font-bold">Finance CalcFest</span>
+                </div>
+                <p class="text-gray-400 mb-4">Professional financial calculators for informed decision making.</p>
+                <p class="text-gray-500 text-sm">© 2025 Finance CalcFest. All rights reserved. Calculations are for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/home-affordability.js" defer></script>
+</body>
+</html>

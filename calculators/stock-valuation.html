@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Valuation Calculator - FinCalc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">FC</span>
+                        </div>
+                        <span class="font-bold text-xl text-gray-900 dark:text-white">FinCalc</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="../index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium">
+                        All Calculators
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Stock Valuation Calculator</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Value stocks using multiple methods including DCF, P/E ratios, dividend discount models, and comparable analysis. 
+                Determine if a stock is overvalued, undervalued, or fairly priced.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Input Form -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Valuation Parameters</h2>
+                
+                <form id="valuationForm" class="space-y-6">
+                    <!-- Stock Information -->
+                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-700">
+                        <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-4">Stock Information</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="stockSymbol" class="block text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                                        Stock Symbol
+                                    </label>
+                                    <input type="text" id="stockSymbol" name="stockSymbol" placeholder="e.g., AAPL"
+                                        class="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                </div>
+                                
+                                <div>
+                                    <label for="currentPrice" class="block text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                                        Current Stock Price
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-2 text-blue-600 dark:text-blue-400">$</span>
+                                        <input type="text" id="currentPrice" name="currentPrice" value="150.00"
+                                            class="w-full pl-8 pr-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="sector" class="block text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                                    Sector/Industry
+                                </label>
+                                <select id="sector" name="sector"
+                                    class="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    <option value="technology">Technology</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="financials">Financials</option>
+                                    <option value="consumer-discretionary">Consumer Discretionary</option>
+                                    <option value="industrials">Industrials</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="energy">Energy</option>
+                                    <option value="materials">Materials</option>
+                                    <option value="real-estate">Real Estate</option>
+                                    <option value="telecommunications">Telecommunications</option>
+                                    <option value="consumer-staples">Consumer Staples</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Metrics -->
+                    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-700">
+                        <h3 class="text-lg font-semibold text-green-800 dark:text-green-200 mb-4">Financial Metrics</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="eps" class="block text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                                        Earnings Per Share (EPS)
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-2 text-green-600 dark:text-green-400">$</span>
+                                        <input type="text" id="eps" name="eps" value="6.00"
+                                            class="w-full pl-8 pr-3 py-2 border border-green-300 dark:border-green-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="dividend" class="block text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                                        Annual Dividend Per Share
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-2 text-green-600 dark:text-green-400">$</span>
+                                        <input type="text" id="dividend" name="dividend" value="0.90"
+                                            class="w-full pl-8 pr-3 py-2 border border-green-300 dark:border-green-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="bookValue" class="block text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                                        Book Value Per Share
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-2 text-green-600 dark:text-green-400">$</span>
+                                        <input type="text" id="bookValue" name="bookValue" value="25.00"
+                                            class="w-full pl-8 pr-3 py-2 border border-green-300 dark:border-green-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="revenue" class="block text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                                        Revenue Per Share
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-2 text-green-600 dark:text-green-400">$</span>
+                                        <input type="text" id="revenue" name="revenue" value="75.00"
+                                            class="w-full pl-8 pr-3 py-2 border border-green-300 dark:border-green-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Growth Projections -->
+                    <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
+                        <h3 class="text-lg font-semibold text-purple-800 dark:text-purple-200 mb-4">Growth Projections</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="revenueGrowth" class="block text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                                        Revenue Growth Rate (%)
+                                    </label>
+                                    <input type="number" id="revenueGrowth" name="revenueGrowth" 
+                                        step="0.1" min="-50" max="100" value="8.0"
+                                        class="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                </div>
+                                
+                                <div>
+                                    <label for="earningsGrowth" class="block text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                                        Earnings Growth Rate (%)
+                                    </label>
+                                    <input type="number" id="earningsGrowth" name="earningsGrowth" 
+                                        step="0.1" min="-50" max="100" value="12.0"
+                                        class="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="dividendGrowth" class="block text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                                        Dividend Growth Rate (%)
+                                    </label>
+                                    <input type="number" id="dividendGrowth" name="dividendGrowth" 
+                                        step="0.1" min="-50" max="100" value="5.0"
+                                        class="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                </div>
+                                
+                                <div>
+                                    <label for="terminalGrowth" class="block text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                                        Terminal Growth Rate (%)
+                                    </label>
+                                    <input type="number" id="terminalGrowth" name="terminalGrowth" 
+                                        step="0.1" min="0" max="10" value="3.0"
+                                        class="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Valuation Parameters -->
+                    <div class="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-4 border border-amber-200 dark:border-amber-700">
+                        <h3 class="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-4">Valuation Parameters</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="discountRate" class="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                                        Discount Rate (%)
+                                    </label>
+                                    <input type="number" id="discountRate" name="discountRate" 
+                                        step="0.1" min="1" max="30" value="10.0"
+                                        class="w-full px-3 py-2 border border-amber-300 dark:border-amber-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    <p class="text-xs text-amber-600 dark:text-amber-400 mt-1">
+                                        Required rate of return (WACC)
+                                    </p>
+                                </div>
+                                
+                                <div>
+                                    <label for="projectionYears" class="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                                        Projection Period (Years)
+                                    </label>
+                                    <input type="number" id="projectionYears" name="projectionYears" 
+                                        min="1" max="20" value="10"
+                                        class="w-full px-3 py-2 border border-amber-300 dark:border-amber-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="marginOfSafety" class="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                                        Margin of Safety (%)
+                                    </label>
+                                    <input type="number" id="marginOfSafety" name="marginOfSafety" 
+                                        step="1" min="0" max="50" value="20"
+                                        class="w-full px-3 py-2 border border-amber-300 dark:border-amber-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                </div>
+                                
+                                <div>
+                                    <label for="peRatio" class="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                                        Target P/E Ratio
+                                    </label>
+                                    <input type="number" id="peRatio" name="peRatio" 
+                                        step="0.1" min="1" max="100" value="18.0"
+                                        class="w-full px-3 py-2 border border-amber-300 dark:border-amber-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparable Companies (Optional) -->
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Comparable Companies</h3>
+                            <button type="button" id="addComparableBtn"
+                                class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-1 px-3 rounded text-sm transition duration-200">
+                                Add Comparable
+                            </button>
+                        </div>
+                        
+                        <div id="comparableCompanies" class="space-y-3">
+                            <!-- Comparable companies will be added here -->
+                        </div>
+                    </div>
+
+                    <button type="submit" 
+                        class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800">
+                        Calculate Stock Valuation
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div class="space-y-6">
+                <!-- Valuation Summary -->
+                <div id="valuationResults" class="hidden space-y-4">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+
+                <!-- Valuation Methods Chart -->
+                <div id="methodsChartContainer" class="hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Valuation Methods Comparison</h3>
+                    <div class="h-80">
+                        <canvas id="methodsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Sensitivity Analysis Chart -->
+                <div id="sensitivityContainer" class="hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Sensitivity Analysis</h3>
+                    <div class="h-80">
+                        <canvas id="sensitivityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- DCF Model Details -->
+                <div id="dcfDetailsContainer" class="hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">DCF Model Breakdown</h3>
+                    <div id="dcfDetailsContent">
+                        <!-- DCF details will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-12 bg-gray-100 dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Stock Valuation Methods</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-700 rounded-lg p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-3">Discounted Cash Flow (DCF)</h3>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li>• Values company based on future cash flows</li>
+                        <li>• Considers time value of money</li>
+                        <li>• Requires growth and discount rate assumptions</li>
+                        <li>• Most comprehensive valuation method</li>
+                        <li>• Sensitive to input assumptions</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 rounded-lg p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-green-600 dark:text-green-400 mb-3">P/E Ratio Method</h3>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li>• Simple earnings-based valuation</li>
+                        <li>• Compares to industry averages</li>
+                        <li>• Good for mature, stable companies</li>
+                        <li>• Less effective for growth companies</li>
+                        <li>• Easy to understand and calculate</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 rounded-lg p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400 mb-3">Dividend Discount Model</h3>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li>• Values based on dividend payments</li>
+                        <li>• Best for dividend-paying stocks</li>
+                        <li>• Assumes dividend growth continues</li>
+                        <li>• Gordon Growth Model variation</li>
+                        <li>• Not suitable for non-dividend stocks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-700">
+                <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-3">Valuation Best Practices</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-700 dark:text-blue-300">
+                    <div>
+                        <h4 class="font-medium mb-2">Analysis Tips:</h4>
+                        <ul class="space-y-1">
+                            <li>• Use multiple valuation methods</li>
+                            <li>• Compare to industry peers</li>
+                            <li>• Consider qualitative factors</li>
+                            <li>• Apply margin of safety</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-2">Common Mistakes:</h4>
+                        <ul class="space-y-1">
+                            <li>• Over-optimistic growth assumptions</li>
+                            <li>• Ignoring economic cycles</li>
+                            <li>• Using inappropriate discount rates</li>
+                            <li>• Neglecting competitive dynamics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/stock-valuation.js"></script>
+</body>
+</html>

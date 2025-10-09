@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Payment Calculator - Calculate Monthly Payments | Finance CalcFest</title>
+    <meta name="description" content="Free mortgage payment calculator. Calculate monthly principal & interest, including taxes and insurance (PITI). Get accurate estimates for your home loan payments.">
+    <link rel="canonical" href="https://calcfest.com/calculators/mortgage-payment.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Mortgage Payment Calculator - Free & Accurate">
+    <meta property="og:description" content="Calculate your monthly mortgage payment including principal, interest, taxes, and insurance. Free professional calculator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/mortgage-payment.html">
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Mortgage Payment Calculator",
+        "description": "Calculate monthly mortgage payments including principal, interest, taxes, and insurance",
+        "url": "https://calcfest.com/calculators/mortgage-payment.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "Finance CalcFest"
+        }
+    }
+    </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <a href="/calculators/" class="text-primary-600 dark:text-primary-400 font-medium">Calculators</a>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 dark:bg-gray-800 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Home</a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <a href="/calculators/" class="ml-1 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Calculators</a>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="ml-1 text-gray-500 dark:text-gray-400">Mortgage Payment Calculator</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Mortgage Payment Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Calculate your monthly mortgage payment including principal, interest, taxes, and insurance (PITI). 
+                Get accurate estimates to plan your home purchase budget.
+            </p>
+        </div>
+
+        <!-- Calculator Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Input Form -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Loan Details</h2>
+                
+                <form id="mortgageForm" data-calculator="mortgage-payment" class="space-y-6">
+                    <div class="form-group">
+                        <label for="homePrice" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Home Price
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-500">$</span>
+                            <input type="number" id="homePrice" name="homePrice" 
+                                   class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="400000" min="10000" max="50000000" required>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Enter the total purchase price of the home</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="downPayment" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Down Payment
+                        </label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="relative">
+                                <span class="absolute left-3 top-3 text-gray-500">$</span>
+                                <input type="number" id="downPayment" name="downPayment" 
+                                       class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                       value="80000" min="0">
+                            </div>
+                            <div class="relative">
+                                <input type="number" id="downPaymentPercent" name="downPaymentPercent" 
+                                       class="w-full pr-8 pl-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                       value="20" min="0" max="100" step="0.1">
+                                <span class="absolute right-3 top-3 text-gray-500">%</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Enter as dollar amount or percentage</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interestRate" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Interest Rate (Annual)
+                        </label>
+                        <div class="relative">
+                            <input type="number" id="interestRate" name="interestRate" 
+                                   class="w-full pr-8 pl-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="6.5" min="0" max="50" step="0.01" required>
+                            <span class="absolute right-3 top-3 text-gray-500">%</span>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Current mortgage interest rate</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanTerm" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Loan Term
+                        </label>
+                        <select id="loanTerm" name="loanTerm" 
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <option value="30">30 years</option>
+                            <option value="25">25 years</option>
+                            <option value="20">20 years</option>
+                            <option value="15">15 years</option>
+                            <option value="10">10 years</option>
+                        </select>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Length of the mortgage loan</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="propertyTax" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Property Tax (Annual)
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-500">$</span>
+                            <input type="number" id="propertyTax" name="propertyTax" 
+                                   class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="6000" min="0">
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Annual property taxes</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="homeInsurance" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Home Insurance (Annual)
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-500">$</span>
+                            <input type="number" id="homeInsurance" name="homeInsurance" 
+                                   class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="1200" min="0">
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Annual homeowner's insurance</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pmi" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            PMI (Monthly)
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-500">$</span>
+                            <input type="number" id="pmi" name="pmi" 
+                                   class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                   value="0" min="0">
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Private Mortgage Insurance (if down payment < 20%)</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50">
+                        Calculate Payment
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Monthly Payment Breakdown</h2>
+                
+                <div id="results" class="space-y-4">
+                    <div class="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-gray-700 dark:to-gray-600 border border-primary-200 dark:border-gray-600 rounded-xl p-6 text-center">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Total Monthly Payment</h3>
+                        <p id="totalPayment" class="text-4xl font-bold text-primary-600 dark:text-primary-400">$2,435</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+                            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Principal & Interest</span>
+                            <span id="principalInterest" class="text-lg font-bold text-gray-900 dark:text-white">$2,135</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+                            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Property Tax</span>
+                            <span id="monthlyPropertyTax" class="text-lg font-bold text-gray-900 dark:text-white">$500</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+                            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Home Insurance</span>
+                            <span id="monthlyInsurance" class="text-lg font-bold text-gray-900 dark:text-white">$100</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+                            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">PMI</span>
+                            <span id="monthlyPMI" class="text-lg font-bold text-gray-900 dark:text-white">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Loan Summary</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Loan Amount:</span>
+                                <span id="loanAmount" class="font-medium text-gray-900 dark:text-white">$320,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Total Interest:</span>
+                                <span id="totalInterest" class="font-medium text-gray-900 dark:text-white">$448,600</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Total Cost:</span>
+                                <span id="totalCost" class="font-medium text-gray-900 dark:text-white">$768,600</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Slot -->
+        <div class="ad-slot bg-gray-100 dark:bg-gray-800 py-8 mb-8">
+            <div class="bg-white dark:bg-gray-700 rounded-lg p-8 text-center border-2 border-dashed border-gray-300 dark:border-gray-600">
+                <p class="text-gray-500 dark:text-gray-400">Advertisement Space</p>
+            </div>
+        </div>
+
+        <!-- How It Works Section -->
+        <section class="bg-gray-50 dark:bg-gray-900 py-12 rounded-xl mb-8">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How the Mortgage Payment Calculator Works</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Formula Used</h3>
+                        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-800 dark:text-gray-200 mb-4">
+                            M = P × [r(1+r)^n] / [(1+r)^n - 1]
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Where:</p>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li><strong>M</strong> = Monthly Payment</li>
+                            <li><strong>P</strong> = Principal Loan Amount</li>
+                            <li><strong>r</strong> = Monthly Interest Rate</li>
+                            <li><strong>n</strong> = Total Number of Payments</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">What's Included</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-gray-700 dark:text-gray-300"><strong>Principal & Interest:</strong> The core loan payment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-gray-700 dark:text-gray-300"><strong>Property Taxes:</strong> Annual taxes divided by 12</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-gray-700 dark:text-gray-300"><strong>Home Insurance:</strong> Annual premium divided by 12</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-gray-700 dark:text-gray-300"><strong>PMI:</strong> Private Mortgage Insurance (if applicable)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Understanding Your Results</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        This calculator provides your total monthly housing payment, often called PITI (Principal, Interest, Taxes, and Insurance). 
+                        The principal and interest portion remains constant throughout your loan, while property taxes and insurance may change annually. 
+                        PMI is typically required when your down payment is less than 20% of the home's value and can be removed once you reach 20% equity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Calculators -->
+        <section class="bg-white dark:bg-gray-800 py-12 rounded-xl">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Related Calculators</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Home Affordability Calculator</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Determine how much house you can afford based on your income and expenses.</p>
+                        <a href="/calculators/home-affordability.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Calculate Affordability →</a>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Amortization Schedule</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">See the complete payment breakdown over the life of your loan.</p>
+                        <a href="/calculators/amortization-schedule.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">View Schedule →</a>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Refinance Calculator</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Calculate potential savings from refinancing your current mortgage.</p>
+                        <a href="/calculators/refinance.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Check Refinance →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">FC</span>
+                    </div>
+                    <span class="text-xl font-bold">Finance CalcFest</span>
+                </div>
+                <p class="text-gray-400 mb-4">Professional financial calculators for informed decision making.</p>
+                <p class="text-gray-500 text-sm">© 2025 Finance CalcFest. All rights reserved. Calculations are for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/mortgage-payment.js" defer></script>
+</body>
+</html>

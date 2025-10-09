@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Down Payment & PMI Calculator - Mortgage Insurance Analysis | Finance CalcFest</title>
+    <meta name="description" content="Calculate down payment amounts and PMI costs. See when PMI is removed and analyze different down payment scenarios for optimal mortgage planning.">
+    <link rel="canonical" href="https://calcfest.com/calculators/down-payment-pmi.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Down Payment & PMI Calculator - Mortgage Insurance Analysis">
+    <meta property="og:description" content="Calculate down payment amounts and PMI costs with removal scenarios and optimization strategies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/down-payment-pmi.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Down Payment & PMI Calculator",
+        "description": "Calculate down payment amounts and PMI costs with removal scenarios and mortgage optimization",
+        "url": "https://calcfest.com/calculators/down-payment-pmi.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors flex items-center">
+                            Calculators
+                            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="absolute top-full left-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="p-4 grid grid-cols-1 gap-4">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Mortgage & Loans</h3>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/mortgage-payment.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Mortgage Payment</a>
+                                        <a href="/calculators/biweekly-mortgage.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Biweekly Mortgage</a>
+                                        <a href="/calculators/extra-payment.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Extra Payment</a>
+                                        <a href="/calculators/15-vs-30-mortgage.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">15 vs 30 Year</a>
+                                        <a href="/calculators/down-payment-pmi.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Down Payment & PMI</a>
+                                        <a href="/calculators/amortization-schedule.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Amortization Schedule</a>
+                                        <a href="/calculators/home-affordability.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Home Affordability</a>
+                                        <a href="/calculators/rent-vs-buy.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Rent vs Buy</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Real Estate Investment</h3>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/cash-flow.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Property Cash Flow</a>
+                                        <a href="/calculators/cap-rate.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Cap Rate Calculator</a>
+                                        <a href="/calculators/roi.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">ROI Calculator</a>
+                                        <a href="/calculators/brrrr.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">BRRRR Calculator</a>
+                                        <a href="/calculators/fix-flip.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Fix & Flip Calculator</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 dark:border-gray-700 p-4">
+                                <a href="/calculators/" class="text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">View All Calculators →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-4 py-3 space-y-3">
+                <a href="/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">Home</a>
+                <a href="/calculators/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">All Calculators</a>
+                <a href="/about.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">About</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-4 h-12 text-sm">
+                <a href="/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Home</a>
+                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <a href="/calculators/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Calculators</a>
+                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-gray-900 dark:text-white font-medium">Down Payment & PMI Calculator</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Down Payment & PMI Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Calculate down payment amounts and Private Mortgage Insurance (PMI) costs. 
+                Compare different down payment scenarios and see when PMI is automatically removed.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Calculator Input -->
+            <div class="lg:col-span-2">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Home Purchase Details</h2>
+                    
+                    <form id="downPaymentForm" class="space-y-6">
+                        <!-- Home Price and Down Payment -->
+                        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Purchase Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="homePrice" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Home Price
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="homePrice" name="homePrice" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="400,000" required>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="downPayment" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Down Payment
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="downPayment" name="downPayment" 
+                                               class="w-full pl-8 pr-16 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="80,000" required>
+                                        <span id="downPaymentPercent" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">20%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Down Payment Buttons -->
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Quick Select:</label>
+                                <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                                    <button type="button" class="down-payment-btn px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-percent="3">3%</button>
+                                    <button type="button" class="down-payment-btn px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-percent="5">5%</button>
+                                    <button type="button" class="down-payment-btn px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-percent="10">10%</button>
+                                    <button type="button" class="down-payment-btn px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-percent="15">15%</button>
+                                    <button type="button" class="down-payment-btn px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-percent="20">20%</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loan Terms -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="interestRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Interest Rate
+                                </label>
+                                <div class="relative">
+                                    <input type="number" id="interestRate" name="interestRate" 
+                                           class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                           placeholder="6.5" min="0.1" max="20" step="0.01" required>
+                                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="loanTerm" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Loan Term
+                                </label>
+                                <select id="loanTerm" name="loanTerm" 
+                                        class="w-full pl-4 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                                    <option value="30">30 Years</option>
+                                    <option value="25">25 Years</option>
+                                    <option value="20">20 Years</option>
+                                    <option value="15">15 Years</option>
+                                    <option value="10">10 Years</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- PMI Information -->
+                        <div class="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-6 border border-amber-200 dark:border-amber-800">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">PMI Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="pmiRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        PMI Rate (Annual)
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" id="pmiRate" name="pmiRate" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="0.5" min="0.1" max="2" step="0.01" value="0.5">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Typically 0.3% - 1.5% annually</p>
+                                </div>
+
+                                <div>
+                                    <label for="pmiRemovalThreshold" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        PMI Removal Threshold
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" id="pmiRemovalThreshold" name="pmiRemovalThreshold" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="78" min="70" max="85" step="1" value="78">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">% LTV</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">78% LTV is standard for automatic removal</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl">
+                            Calculate Down Payment & PMI
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="lg:col-span-1">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Quick Summary</h3>
+                    
+                    <div id="quickResults" class="space-y-6">
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"/>
+                            </svg>
+                            <p>Enter home price and down payment to see analysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Analysis -->
+        <div id="detailedAnalysis" class="mt-12 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-8">Down Payment & PMI Analysis</h2>
+                
+                <!-- Loan Summary -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Loan Details</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Home Price:</span>
+                                <span id="summaryHomePrice" class="font-medium text-gray-900 dark:text-white">$400,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Down Payment:</span>
+                                <span id="summaryDownPayment" class="font-medium text-gray-900 dark:text-white">$80,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Loan Amount:</span>
+                                <span id="summaryLoanAmount" class="font-medium text-gray-900 dark:text-white">$320,000</span>
+                            </div>
+                            <div class="flex justify-between border-t pt-3">
+                                <span class="text-gray-600 dark:text-gray-400">LTV Ratio:</span>
+                                <span id="summaryLTV" class="font-medium text-blue-600 dark:text-blue-400">80%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Monthly Payments</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Principal & Interest:</span>
+                                <span id="monthlyPI" class="font-medium text-gray-900 dark:text-white">$1,918</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">PMI Payment:</span>
+                                <span id="monthlyPMI" class="font-medium text-gray-900 dark:text-white">$133</span>
+                            </div>
+                            <div class="flex justify-between border-t pt-3">
+                                <span class="text-gray-600 dark:text-gray-400">Total Monthly:</span>
+                                <span id="totalMonthly" class="font-medium text-green-600 dark:text-green-400">$2,051</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-6 border border-amber-200 dark:border-amber-800">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">PMI Details</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">PMI Required:</span>
+                                <span id="pmiRequired" class="font-medium text-gray-900 dark:text-white">Yes</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Removal Date:</span>
+                                <span id="pmiRemovalDate" class="font-medium text-gray-900 dark:text-white">Jul 2031</span>
+                            </div>
+                            <div class="flex justify-between border-t pt-3">
+                                <span class="text-gray-600 dark:text-gray-400">Total PMI Cost:</span>
+                                <span id="totalPMICost" class="font-medium text-amber-600 dark:text-amber-400">$11,704</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Down Payment Scenarios -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Down Payment Scenarios</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg">
+                            <thead class="bg-gray-50 dark:bg-gray-600">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Down Payment</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">LTV</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">PMI Required</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Monthly Payment</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">PMI Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scenariosTable" class="divide-y divide-gray-200 dark:divide-gray-600">
+                                <!-- Scenarios will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PMI Removal Progress -->
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">PMI Removal Timeline</h3>
+                    <div class="mb-4">
+                        <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
+                            <span>Current LTV: <span id="currentLTV" class="font-medium">80%</span></span>
+                            <span>Target LTV: <span id="targetLTV" class="font-medium">78%</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3">
+                            <div id="ltvProgress" class="bg-gradient-to-r from-amber-500 to-green-500 h-3 rounded-full transition-all duration-300" style="width: 10%"></div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Payments Until Removal</p>
+                            <p id="paymentsUntilRemoval" class="text-lg font-bold text-amber-600 dark:text-amber-400">88</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Years Until Removal</p>
+                            <p id="yearsUntilRemoval" class="text-lg font-bold text-amber-600 dark:text-amber-400">7.3</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Principal Needed</p>
+                            <p id="principalNeeded" class="text-lg font-bold text-amber-600 dark:text-amber-400">$8,000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Understanding Down Payments & PMI</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Down Payment Basics</h3>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>20% = No PMI:</strong> Putting down 20% or more eliminates the need for PMI</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Lower rates:</strong> Higher down payments often qualify for better interest rates</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Instant equity:</strong> Your down payment becomes immediate home equity</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Lower payments:</strong> Larger down payment means smaller loan and lower monthly payments</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">PMI Explained</h3>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Protects lender:</strong> PMI protects the lender if you default on the loan</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Required <20%:</strong> Mandatory when down payment is less than 20%</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Auto removal:</strong> Automatically cancelled when you reach 78% LTV</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Request removal:</strong> Can request removal at 80% LTV with appraisal</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800">
+                <h3 class="text-lg font-semibold text-green-800 dark:text-green-200 mb-3">💡 Optimization Strategies</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-green-700 dark:text-green-300 mb-2">Minimize PMI Impact:</h4>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li>• Save for 20% down payment to avoid PMI entirely</li>
+                            <li>• Consider 80-10-10 loan (piggyback loan) structure</li>
+                            <li>• Make extra principal payments to reach 78% LTV faster</li>
+                            <li>• Request PMI removal when home value increases</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-green-700 dark:text-green-300 mb-2">Down Payment Sources:</h4>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li>• Personal savings and investments</li>
+                            <li>• Gifts from family members (with proper documentation)</li>
+                            <li>• Down payment assistance programs</li>
+                            <li>• 401(k) loans or IRA withdrawals (first-time buyers)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold">Finance CalcFest</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Professional financial calculators for informed decision making. Calculate everything from mortgages to investment returns.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Mortgage Calculators</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/mortgage-payment.html" class="text-gray-400 hover:text-white transition-colors">Mortgage Payment</a></li>
+                        <li><a href="/calculators/biweekly-mortgage.html" class="text-gray-400 hover:text-white transition-colors">Biweekly Mortgage</a></li>
+                        <li><a href="/calculators/extra-payment.html" class="text-gray-400 hover:text-white transition-colors">Extra Payment</a></li>
+                        <li><a href="/calculators/15-vs-30-mortgage.html" class="text-gray-400 hover:text-white transition-colors">15 vs 30 Year</a></li>
+                        <li><a href="/calculators/down-payment-pmi.html" class="text-gray-400 hover:text-white transition-colors">Down Payment & PMI</a></li>
+                        <li><a href="/calculators/home-affordability.html" class="text-gray-400 hover:text-white transition-colors">Home Affordability</a></li>
+                        <li><a href="/calculators/amortization-schedule.html" class="text-gray-400 hover:text-white transition-colors">Amortization Schedule</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/" class="text-gray-400 hover:text-white transition-colors">All Calculators</a></li>
+                        <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 Finance CalcFest. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm mt-2 md:mt-0">
+                        Calculations are estimates. Consult a financial advisor for personalized advice.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/down-payment-pmi.js" defer></script>
+</body>
+</html>

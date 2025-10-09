@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment Calculator - FinCalc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"}
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">FC</span>
+                        </div>
+                        <span class="font-bold text-xl text-gray-900 dark:text-white">FinCalc</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="../index.html" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition duration-200">
+                        All Calculators
+                    </a>
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Risk Assessment Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Evaluate your risk tolerance, analyze portfolio risk metrics, and optimize your investment strategy with comprehensive risk assessment tools.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Calculator Form -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Risk Assessment</h2>
+                
+                <form id="riskForm" class="space-y-6">
+                    <!-- Risk Tolerance Questionnaire -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-600 pb-2">
+                            Risk Tolerance Questionnaire
+                        </h3>
+                        
+                        <!-- Age -->
+                        <div>
+                            <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Age
+                            </label>
+                            <input type="number" id="age" min="18" max="100" 
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                                placeholder="Enter your age">
+                        </div>
+
+                        <!-- Investment Experience -->
+                        <div>
+                            <label for="experience" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Investment Experience
+                            </label>
+                            <select id="experience" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                                <option value="">Select experience level</option>
+                                <option value="beginner">Beginner (Less than 1 year)</option>
+                                <option value="novice">Novice (1-3 years)</option>
+                                <option value="intermediate">Intermediate (3-10 years)</option>
+                                <option value="experienced">Experienced (10+ years)</option>
+                                <option value="expert">Expert (Professional investor)</option>
+                            </select>
+                        </div>
+
+                        <!-- Investment Timeline -->
+                        <div>
+                            <label for="timeline" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Investment Time Horizon
+                            </label>
+                            <select id="timeline" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                                <option value="">Select time horizon</option>
+                                <option value="short">Short-term (Less than 3 years)</option>
+                                <option value="medium">Medium-term (3-10 years)</option>
+                                <option value="long">Long-term (10+ years)</option>
+                                <option value="retirement">Retirement planning (20+ years)</option>
+                            </select>
+                        </div>
+
+                        <!-- Risk Capacity -->
+                        <div>
+                            <label for="riskCapacity" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Financial Risk Capacity
+                            </label>
+                            <select id="riskCapacity" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                                <option value="">Select risk capacity</option>
+                                <option value="low">Low - Need stable income, limited emergency fund</option>
+                                <option value="moderate">Moderate - Some emergency savings, stable income</option>
+                                <option value="high">High - Strong emergency fund, secure income</option>
+                                <option value="very-high">Very High - Substantial assets, multiple income sources</option>
+                            </select>
+                        </div>
+
+                        <!-- Market Volatility Comfort -->
+                        <div>
+                            <label for="volatilityComfort" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Comfort with Market Volatility
+                            </label>
+                            <select id="volatilityComfort" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                                <option value="">Select comfort level</option>
+                                <option value="very-low">Very Low - Cannot tolerate any losses</option>
+                                <option value="low">Low - Maximum 5% portfolio decline</option>
+                                <option value="moderate">Moderate - Can handle 10-15% decline</option>
+                                <option value="high">High - Comfortable with 20-30% decline</option>
+                                <option value="very-high">Very High - Can handle 30%+ decline</option>
+                            </select>
+                        </div>
+
+                        <!-- Investment Goals -->
+                        <div>
+                            <label for="investmentGoals" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Primary Investment Goals
+                            </label>
+                            <select id="investmentGoals" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                                <option value="">Select primary goal</option>
+                                <option value="preservation">Capital Preservation</option>
+                                <option value="income">Income Generation</option>
+                                <option value="balanced">Balanced Growth & Income</option>
+                                <option value="growth">Capital Growth</option>
+                                <option value="aggressive">Aggressive Growth</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Analysis (Optional) -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-600 pb-2">
+                            Portfolio Risk Analysis (Optional)
+                        </h3>
+                        
+                        <!-- Portfolio Value -->
+                        <div>
+                            <label for="portfolioValue" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Total Portfolio Value ($)
+                            </label>
+                            <input type="text" id="portfolioValue" 
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                                placeholder="e.g., 100,000">
+                        </div>
+
+                        <!-- Asset Allocation -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="stockAllocation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Stocks (%)
+                                </label>
+                                <input type="number" id="stockAllocation" min="0" max="100" step="1"
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                                    placeholder="60">
+                            </div>
+                            <div>
+                                <label for="bondAllocation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Bonds (%)
+                                </label>
+                                <input type="number" id="bondAllocation" min="0" max="100" step="1"
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                                    placeholder="40">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="cashAllocation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Cash/Cash Equivalents (%)
+                                </label>
+                                <input type="number" id="cashAllocation" min="0" max="100" step="1"
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                                    placeholder="0">
+                            </div>
+                            <div>
+                                <label for="alternativeAllocation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Alternatives (%)
+                                </label>
+                                <input type="number" id="alternativeAllocation" min="0" max="100" step="1"
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                                    placeholder="0">
+                            </div>
+                        </div>
+
+                        <!-- Geographic Diversification -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="domesticAllocation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Domestic (%)
+                                </label>
+                                <input type="number" id="domesticAllocation" min="0" max="100" step="1"
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                                    placeholder="70">
+                            </div>
+                            <div>
+                                <label for="internationalAllocation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    International (%)
+                                </label>
+                                <input type="number" id="internationalAllocation" min="0" max="100" step="1"
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+                                    placeholder="30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        Assess Risk Profile
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div class="space-y-6">
+                <!-- Risk Profile Results -->
+                <div id="riskResults" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700 hidden">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Risk Assessment Results</h3>
+                    <div id="riskResultsContent">
+                        <!-- Results will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Risk Profile Chart -->
+                <div id="riskChartContainer" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700 hidden">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Risk Profile Visualization</h3>
+                    <div class="h-80">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Portfolio Analysis -->
+                <div id="portfolioAnalysis" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700 hidden">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Portfolio Risk Analysis</h3>
+                    <div id="portfolioAnalysisContent">
+                        <!-- Portfolio analysis will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Recommended Allocation -->
+                <div id="recommendedAllocation" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700 hidden">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Recommended Asset Allocation</h3>
+                    <div class="h-80">
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    <div id="allocationDetails" class="mt-4">
+                        <!-- Allocation details will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Risk Management Tips -->
+                <div id="riskTips" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700 hidden">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Risk Management Recommendations</h3>
+                    <div id="riskTipsContent">
+                        <!-- Tips will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-12 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Understanding Investment Risk</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <h3 class="text-lg font-semibold text-primary-600 dark:text-primary-400">Types of Risk</h3>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li>• <strong>Market Risk:</strong> Overall market volatility</li>
+                        <li>• <strong>Credit Risk:</strong> Default risk of bonds/loans</li>
+                        <li>• <strong>Liquidity Risk:</strong> Difficulty selling investments</li>
+                        <li>• <strong>Inflation Risk:</strong> Purchasing power erosion</li>
+                        <li>• <strong>Currency Risk:</strong> Foreign exchange fluctuations</li>
+                        <li>• <strong>Interest Rate Risk:</strong> Bond price sensitivity</li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-3">
+                    <h3 class="text-lg font-semibold text-primary-600 dark:text-primary-400">Risk Tolerance Factors</h3>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li>• <strong>Age:</strong> Younger investors can take more risk</li>
+                        <li>• <strong>Time Horizon:</strong> Longer periods allow risk recovery</li>
+                        <li>• <strong>Financial Capacity:</strong> Ability to absorb losses</li>
+                        <li>• <strong>Experience:</strong> Knowledge reduces perceived risk</li>
+                        <li>• <strong>Goals:</strong> Objectives influence risk needs</li>
+                        <li>• <strong>Emotional Comfort:</strong> Psychological factors</li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-3">
+                    <h3 class="text-lg font-semibold text-primary-600 dark:text-primary-400">Risk Management</h3>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li>• <strong>Diversification:</strong> Spread across asset classes</li>
+                        <li>• <strong>Asset Allocation:</strong> Balance risk and return</li>
+                        <li>• <strong>Rebalancing:</strong> Maintain target allocations</li>
+                        <li>• <strong>Dollar-Cost Averaging:</strong> Reduce timing risk</li>
+                        <li>• <strong>Emergency Fund:</strong> Liquidity buffer</li>
+                        <li>• <strong>Regular Review:</strong> Adjust as circumstances change</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg border border-primary-200 dark:border-primary-700">
+                <h4 class="font-semibold text-primary-800 dark:text-primary-200 mb-2">Risk vs. Return Relationship</h4>
+                <p class="text-sm text-primary-700 dark:text-primary-300">
+                    Generally, higher potential returns come with higher risk. The key is finding the right balance for your situation. 
+                    Conservative investments like bonds offer lower returns but more stability, while stocks offer higher potential returns 
+                    but greater volatility. A well-diversified portfolio can help optimize this risk-return tradeoff.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dark Mode Toggle Script -->
+    <script>
+        // Dark mode functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        });
+    </script>
+
+    <!-- Calculator Script -->
+    <script src="../assets/js/risk-assessment.js"></script>
+</body>
+</html>

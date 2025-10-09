@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent vs Buy Calculator - Should You Rent or Buy a Home? | Finance CalcFest</title>
+    <meta name="description" content="Compare the true costs of renting versus buying a home. Calculate total cost of ownership, opportunity costs, and break-even analysis for informed housing decisions.">
+    <link rel="canonical" href="https://calcfest.com/calculators/rent-vs-buy.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Rent vs Buy Calculator - Compare Housing Costs">
+    <meta property="og:description" content="Comprehensive analysis of renting vs buying including hidden costs and opportunity costs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/rent-vs-buy.html">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Calculator",
+        "name": "Rent vs Buy Calculator",
+        "description": "Compare the financial implications of renting versus buying a home",
+        "url": "https://calcfest.com/calculators/rent-vs-buy.html",
+        "applicationCategory": "FinanceApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "Finance CalcFest"
+        }
+    }
+    </script>
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- Fallback styles to ensure input borders are visible -->
+    <style>
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db !important;
+            border-radius: 0.5rem;
+            background-color: white;
+            color: #111827;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Force consistent dark mode support */
+        .dark .input-field,
+        html.dark .input-field,
+        [data-theme="dark"] .input-field {
+            background-color: #374151 !important;
+            border-color: #4b5563 !important;
+            color: white !important;
+        }
+        
+        .dark .input-field:focus,
+        html.dark .input-field:focus,
+        [data-theme="dark"] .input-field:focus {
+            border-color: #60a5fa !important;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        }
+
+        .dark .input-label,
+        html.dark .input-label,
+        [data-theme="dark"] .input-label {
+            color: #d1d5db !important;
+        }
+
+        /* Ensure select elements also get proper styling */
+        select.input-field {
+            cursor: pointer;
+        }
+
+        /* Improve placeholder text visibility */
+        .input-field::placeholder {
+            color: #9ca3af;
+        }
+
+        .dark .input-field::placeholder,
+        html.dark .input-field::placeholder,
+        [data-theme="dark"] .input-field::placeholder {
+            color: #6b7280 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <a href="/calculators/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Calculators</a>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-300">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <a href="/calculators/" class="ml-1 text-sm font-medium text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-300 md:ml-2">Calculators</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <span class="ml-1 text-sm font-medium text-gray-500 dark:text-gray-500 md:ml-2">Rent vs Buy</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Rent vs Buy Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Compare the true financial cost of renting versus buying a home. Get a comprehensive analysis including opportunity costs, tax benefits, and break-even calculations.
+            </p>
+        </div>
+
+        <!-- Calculator Form -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <!-- Home Purchase Details -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Purchase Details</h2>
+                <form id="rentVsBuyForm" data-calculator="rent-vs-buy" class="space-y-4">
+                    <div>
+                        <label for="homePrice" class="input-label">Home Price</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="homePrice" name="homePrice" 
+                                   class="input-field pl-8" 
+                                   placeholder="450,000" 
+                                   value="450000"
+                                   min="50000" 
+                                   max="50000000" 
+                                   step="1000" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="downPayment" class="input-label">Down Payment</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="downPayment" name="downPayment" 
+                                   class="input-field pl-8" 
+                                   placeholder="90,000" 
+                                   value="90000"
+                                   min="0" 
+                                   max="999999999" 
+                                   step="1000" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="interestRate" class="input-label">Mortgage Rate (%)</label>
+                        <div class="relative">
+                            <input type="number" id="interestRate" name="interestRate" 
+                                   class="input-field pr-8" 
+                                   placeholder="6.75" 
+                                   value="6.75"
+                                   min="0" 
+                                   max="50" 
+                                   step="0.001" required>
+                            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="loanTerm" class="input-label">Loan Term</label>
+                        <select id="loanTerm" name="loanTerm" class="input-field" required>
+                            <option value="30">30 years</option>
+                            <option value="25">25 years</option>
+                            <option value="20">20 years</option>
+                            <option value="15">15 years</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="closingCosts" class="input-label">Closing Costs</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="closingCosts" name="closingCosts" 
+                                   class="input-field pl-8" 
+                                   placeholder="9,000" 
+                                   value="9000"
+                                   min="0" 
+                                   max="999999" 
+                                   step="100">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="propertyTax" class="input-label">Annual Property Tax</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="propertyTax" name="propertyTax" 
+                                   class="input-field pl-8" 
+                                   placeholder="5,400" 
+                                   value="5400"
+                                   min="0" 
+                                   max="999999" 
+                                   step="100">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="homeInsurance" class="input-label">Annual Home Insurance</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="homeInsurance" name="homeInsurance" 
+                                   class="input-field pl-8" 
+                                   placeholder="1,200" 
+                                   value="1200"
+                                   min="0" 
+                                   max="99999" 
+                                   step="50">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="maintenance" class="input-label">Annual Maintenance</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="maintenance" name="maintenance" 
+                                   class="input-field pl-8" 
+                                   placeholder="4,500" 
+                                   value="4500"
+                                   min="0" 
+                                   max="99999" 
+                                   step="100">
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Typically 1% of home value</p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Rental Details -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Rental Details</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="monthlyRent" class="input-label">Monthly Rent</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="monthlyRent" name="monthlyRent" 
+                                   class="input-field pl-8" 
+                                   placeholder="2,500" 
+                                   value="2500"
+                                   min="100" 
+                                   max="99999" 
+                                   step="50" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="rentIncrease" class="input-label">Annual Rent Increase (%)</label>
+                        <div class="relative">
+                            <input type="number" id="rentIncrease" name="rentIncrease" 
+                                   class="input-field pr-8" 
+                                   placeholder="3.0" 
+                                   value="3.0"
+                                   min="0" 
+                                   max="20" 
+                                   step="0.1">
+                            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="securityDeposit" class="input-label">Security Deposit</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="securityDeposit" name="securityDeposit" 
+                                   class="input-field pl-8" 
+                                   placeholder="2,500" 
+                                   value="2500"
+                                   min="0" 
+                                   max="99999" 
+                                   step="50">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="rentersInsurance" class="input-label">Annual Renters Insurance</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="rentersInsurance" name="rentersInsurance" 
+                                   class="input-field pl-8" 
+                                   placeholder="200" 
+                                   value="200"
+                                   min="0" 
+                                   max="9999" 
+                                   step="10">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="movingCosts" class="input-label">Moving Costs</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                            <input type="number" id="movingCosts" name="movingCosts" 
+                                   class="input-field pl-8" 
+                                   placeholder="1,500" 
+                                   value="1500"
+                                   min="0" 
+                                   max="99999" 
+                                   step="100">
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-8 mb-4">Analysis Settings</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="timeframe" class="input-label">Analysis Timeframe</label>
+                        <select id="timeframe" name="timeframe" class="input-field" required>
+                            <option value="3">3 years</option>
+                            <option value="5" selected>5 years</option>
+                            <option value="7">7 years</option>
+                            <option value="10">10 years</option>
+                            <option value="15">15 years</option>
+                            <option value="20">20 years</option>
+                            <option value="30">30 years</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="homeAppreciation" class="input-label">Annual Home Appreciation (%)</label>
+                        <div class="relative">
+                            <input type="number" id="homeAppreciation" name="homeAppreciation" 
+                                   class="input-field pr-8" 
+                                   placeholder="3.5" 
+                                   value="3.5"
+                                   min="0" 
+                                   max="20" 
+                                   step="0.1">
+                            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="investmentReturn" class="input-label">Investment Return (Down Payment) (%)</label>
+                        <div class="relative">
+                            <input type="number" id="investmentReturn" name="investmentReturn" 
+                                   class="input-field pr-8" 
+                                   placeholder="7.0" 
+                                   value="7.0"
+                                   min="0" 
+                                   max="50" 
+                                   step="0.1">
+                            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Return if down payment invested instead</p>
+                    </div>
+
+                    <div>
+                        <label for="taxBracket" class="input-label">Tax Bracket (%)</label>
+                        <div class="relative">
+                            <input type="number" id="taxBracket" name="taxBracket" 
+                                   class="input-field pr-8" 
+                                   placeholder="22" 
+                                   value="22"
+                                   min="0" 
+                                   max="50" 
+                                   step="1">
+                            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">For mortgage interest deduction</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Analysis Results</h2>
+                
+                <div id="results" class="space-y-6">
+                    <!-- Winner Display -->
+                    <div class="text-center p-4 rounded-lg" id="winnerDisplay">
+                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Financial Winner</div>
+                        <div id="winner" class="text-2xl font-bold text-primary-600 dark:text-primary-400">Calculating...</div>
+                        <div id="savings" class="text-lg text-gray-900 dark:text-white mt-1">-</div>
+                    </div>
+
+                    <!-- Cost Comparison -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Total Cost Comparison</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Buying Total Cost</span>
+                                <span id="buyingCost" class="text-lg font-bold text-red-600 dark:text-red-400">$0</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Renting Total Cost</span>
+                                <span id="rentingCost" class="text-lg font-bold text-blue-600 dark:text-blue-400">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Net Worth Impact -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Net Worth Impact</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Buying Net Worth</span>
+                                <span id="buyingNetWorth" class="text-lg font-bold text-gray-900 dark:text-white">$0</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Renting Net Worth</span>
+                                <span id="rentingNetWorth" class="text-lg font-bold text-gray-900 dark:text-white">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Break-even Analysis -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Break-even Analysis</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Break-even Time</span>
+                                <span id="breakEvenTime" class="text-lg font-bold text-accent-600 dark:text-accent-400">-</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Monthly Payment Difference</span>
+                                <span id="monthlyDifference" class="text-lg font-bold text-gray-900 dark:text-white">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Factors -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Key Factors</h3>
+                        
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Home Equity Built</span>
+                                <span id="equityBuilt" class="font-medium text-gray-900 dark:text-white">$0</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Tax Savings (Buying)</span>
+                                <span id="taxSavings" class="font-medium text-gray-900 dark:text-white">$0</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Investment Returns (Renting)</span>
+                                <span id="investmentGains" class="font-medium text-gray-900 dark:text-white">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <button id="exportResults" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-semibold py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 text-sm">
+                        Export Analysis
+                    </button>
+                    <button id="shareResults" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-semibold py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 text-sm">
+                        Share Results
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Breakdown Chart Area -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Year-by-Year Analysis</h2>
+            <div id="yearlyBreakdown" class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Year</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Buying Cost</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Renting Cost</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Home Value</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Mortgage Balance</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Net Worth Diff</th>
+                        </tr>
+                    </thead>
+                    <tbody id="breakdownBody" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        <!-- Breakdown rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-blue-50 dark:bg-blue-900 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-blue-900 dark:text-blue-100 mb-4">Factors Favoring Buying</h3>
+                <ul class="space-y-2 text-blue-800 dark:text-blue-200">
+                    <li>• Stable housing for 5+ years</li>
+                    <li>• Building equity and wealth</li>
+                    <li>• Tax benefits (mortgage interest deduction)</li>
+                    <li>• Protection against rent increases</li>
+                    <li>• Freedom to modify and personalize</li>
+                    <li>• Forced savings through principal payments</li>
+                </ul>
+            </div>
+            
+            <div class="bg-green-50 dark:bg-green-900 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-green-900 dark:text-green-100 mb-4">Factors Favoring Renting</h3>
+                <ul class="space-y-2 text-green-800 dark:text-green-200">
+                    <li>• Greater flexibility and mobility</li>
+                    <li>• No maintenance or repair costs</li>
+                    <li>• Lower upfront costs</li>
+                    <li>• Investment opportunity with down payment</li>
+                    <li>• No property tax or insurance</li>
+                    <li>• Predictable monthly expenses</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Related Calculators -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Related Calculators</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="/calculators/mortgage-payment.html" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Mortgage Payment</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Calculate your monthly mortgage payment including PITI.</p>
+                </a>
+                <a href="/calculators/home-affordability.html" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Home Affordability</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Determine how much house you can afford.</p>
+                </a>
+                <a href="/calculators/amortization.html" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Amortization Schedule</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">View detailed loan payment breakdown.</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">FC</span>
+                    </div>
+                    <span class="text-xl font-bold">Finance CalcFest</span>
+                </div>
+                <p class="text-gray-400 mb-4">Professional financial calculators for informed decision making.</p>
+                <p class="text-gray-500 text-sm">© 2025 Finance CalcFest. All rights reserved. Calculations are for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/rent-vs-buy.js" defer></script>
+</body>
+</html>

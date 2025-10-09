@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPM Calculator - FinCalc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">FC</span>
+                        </div>
+                        <span class="font-bold text-xl text-gray-900 dark:text-white">FinCalc</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="../index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium">
+                        All Calculators
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">CAPM Calculator</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Calculate expected stock returns using the Capital Asset Pricing Model. Analyze risk-adjusted returns, 
+                beta coefficients, and compare investments against market performance and risk-free rates.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Input Form -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">CAPM Parameters</h2>
+                
+                <form id="capmForm" class="space-y-6">
+                    <!-- Risk-Free Rate -->
+                    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-700">
+                        <h3 class="text-lg font-semibold text-green-800 dark:text-green-200 mb-4">Risk-Free Rate</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="riskFreeRate" class="block text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                                    Risk-Free Rate (%)
+                                </label>
+                                <input type="number" id="riskFreeRate" name="riskFreeRate" 
+                                    step="0.01" min="0" max="10" value="2.5"
+                                    class="w-full px-3 py-2 border border-green-300 dark:border-green-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                <p class="text-xs text-green-600 dark:text-green-400 mt-1">
+                                    Typically 10-year Treasury bond rate
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <label for="riskFreeSource" class="block text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                                    Source
+                                </label>
+                                <select id="riskFreeSource" name="riskFreeSource"
+                                    class="w-full px-3 py-2 border border-green-300 dark:border-green-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    <option value="10-year-treasury">10-Year Treasury</option>
+                                    <option value="3-month-treasury">3-Month Treasury</option>
+                                    <option value="fed-funds">Federal Funds Rate</option>
+                                    <option value="custom">Custom Rate</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Market Return -->
+                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-700">
+                        <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-4">Market Return</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="marketReturn" class="block text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                                    Expected Market Return (%)
+                                </label>
+                                <input type="number" id="marketReturn" name="marketReturn" 
+                                    step="0.01" min="0" max="20" value="8.0"
+                                    class="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                <p class="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                                    Historical S&P 500 average is around 8-10%
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <label for="marketBenchmark" class="block text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                                    Market Benchmark
+                                </label>
+                                <select id="marketBenchmark" name="marketBenchmark"
+                                    class="w-full px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    <option value="sp500">S&P 500</option>
+                                    <option value="nasdaq">NASDAQ Composite</option>
+                                    <option value="russell2000">Russell 2000</option>
+                                    <option value="total-market">Total Stock Market</option>
+                                    <option value="custom">Custom Index</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Asset Beta -->
+                    <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
+                        <h3 class="text-lg font-semibold text-purple-800 dark:text-purple-200 mb-4">Asset Information</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="assetBeta" class="block text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                                    Beta Coefficient (β)
+                                </label>
+                                <input type="number" id="assetBeta" name="assetBeta" 
+                                    step="0.01" min="-2" max="3" value="1.2"
+                                    class="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                <p class="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                                    β > 1: More volatile than market | β < 1: Less volatile | β = 1: Same as market
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <label for="assetName" class="block text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                                    Asset Name (Optional)
+                                </label>
+                                <input type="text" id="assetName" name="assetName" placeholder="e.g., AAPL, Portfolio A"
+                                    class="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                            </div>
+
+                            <div>
+                                <label for="betaCalculationMethod" class="block text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                                    Beta Source
+                                </label>
+                                <select id="betaCalculationMethod" name="betaCalculationMethod"
+                                    class="w-full px-3 py-2 border border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                    <option value="known">Known Beta Value</option>
+                                    <option value="calculate">Calculate from Returns</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Beta Calculation (Hidden by default) -->
+                    <div id="betaCalculationSection" class="hidden bg-amber-50 dark:bg-amber-900/20 rounded-lg p-4 border border-amber-200 dark:border-amber-700">
+                        <h3 class="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-4">Calculate Beta from Returns</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="assetReturns" class="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                                        Asset Returns (%)
+                                    </label>
+                                    <textarea id="assetReturns" name="assetReturns" rows="4" 
+                                        placeholder="Enter monthly returns separated by commas&#10;e.g., 2.5, -1.2, 4.1, 0.8"
+                                        class="w-full px-3 py-2 border border-amber-300 dark:border-amber-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent dark:bg-gray-700 dark:text-white"></textarea>
+                                </div>
+                                
+                                <div>
+                                    <label for="marketReturns" class="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                                        Market Returns (%)
+                                    </label>
+                                    <textarea id="marketReturns" name="marketReturns" rows="4" 
+                                        placeholder="Enter corresponding market returns&#10;e.g., 1.8, -0.9, 3.2, 1.1"
+                                        class="w-full px-3 py-2 border border-amber-300 dark:border-amber-600 rounded-lg focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent dark:bg-gray-700 dark:text-white"></textarea>
+                                </div>
+                            </div>
+                            
+                            <button type="button" id="calculateBetaBtn"
+                                class="bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+                                Calculate Beta
+                            </button>
+                            
+                            <div id="betaCalculationResult" class="hidden bg-amber-100 dark:bg-amber-900/30 rounded-lg p-3">
+                                <!-- Beta calculation result will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multiple Assets Comparison (Optional) -->
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Compare Multiple Assets</h3>
+                            <button type="button" id="addAssetBtn"
+                                class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-1 px-3 rounded text-sm transition duration-200">
+                                Add Asset
+                            </button>
+                        </div>
+                        
+                        <div id="additionalAssets" class="space-y-3">
+                            <!-- Additional assets will be added here -->
+                        </div>
+                    </div>
+
+                    <button type="submit" 
+                        class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800">
+                        Calculate CAPM Returns
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div class="space-y-6">
+                <!-- CAPM Results -->
+                <div id="capmResults" class="hidden space-y-4">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+
+                <!-- Security Market Line Chart -->
+                <div id="smlContainer" class="hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Security Market Line (SML)</h3>
+                    <div class="h-80">
+                        <canvas id="smlChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                        The SML shows the relationship between risk (beta) and expected return. Assets above the line are undervalued.
+                    </p>
+                </div>
+
+                <!-- Beta Analysis Chart -->
+                <div id="betaAnalysisContainer" class="hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Beta Analysis</h3>
+                    <div class="h-80">
+                        <canvas id="betaChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Risk-Return Analysis -->
+                <div id="riskReturnContainer" class="hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Risk-Return Analysis</h3>
+                    <div id="riskReturnContent">
+                        <!-- Risk-return analysis content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-12 bg-gray-100 dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Understanding CAPM</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-700 rounded-lg p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-3">CAPM Formula</h3>
+                    <div class="text-sm text-gray-600 dark:text-gray-300 space-y-2">
+                        <p><strong>Expected Return = Risk-Free Rate + Beta × Market Risk Premium</strong></p>
+                        <p class="text-xs">Where Market Risk Premium = Market Return - Risk-Free Rate</p>
+                        <p class="text-xs mt-3"><strong>Example:</strong><br>
+                        If Risk-Free = 2.5%, Market Return = 8%, Beta = 1.2<br>
+                        Expected Return = 2.5% + 1.2 × (8% - 2.5%) = 9.1%</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 rounded-lg p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-green-600 dark:text-green-400 mb-3">Beta Interpretation</h3>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li>• <strong>β = 1.0:</strong> Moves with market</li>
+                        <li>• <strong>β > 1.0:</strong> More volatile than market</li>
+                        <li>• <strong>β < 1.0:</strong> Less volatile than market</li>
+                        <li>• <strong>β = 0:</strong> No correlation with market</li>
+                        <li>• <strong>β < 0:</strong> Moves opposite to market</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 rounded-lg p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400 mb-3">CAPM Assumptions</h3>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li>• Investors are rational and risk-averse</li>
+                        <li>• Perfect information available to all</li>
+                        <li>• No transaction costs or taxes</li>
+                        <li>• Single investment period</li>
+                        <li>• Unlimited borrowing/lending at risk-free rate</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-700">
+                <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-3">CAPM Applications</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-700 dark:text-blue-300">
+                    <div>
+                        <h4 class="font-medium mb-2">Portfolio Management:</h4>
+                        <ul class="space-y-1">
+                            <li>• Asset valuation and pricing</li>
+                            <li>• Performance measurement</li>
+                            <li>• Portfolio construction</li>
+                            <li>• Risk-adjusted returns</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-2">Corporate Finance:</h4>
+                        <ul class="space-y-1">
+                            <li>• Cost of equity calculation</li>
+                            <li>• Capital budgeting decisions</li>
+                            <li>• Project risk assessment</li>
+                            <li>• Hurdle rate determination</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/capm.js"></script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>401k Calculator - Retirement Planning & Employer Matching | Finance CalcFest</title>
+    <meta name="description" content="Calculate your 401k retirement savings with employer matching, tax benefits, and detailed projections. Plan your retirement with confidence.">
+    <link rel="canonical" href="https://calcfest.com/calculators/401k.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="401k Calculator - Retirement Planning & Employer Matching">
+    <meta property="og:description" content="Calculate 401k savings with employer matching and tax benefits for retirement planning.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/401k.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- Chart.js for retirement projections -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "401k Calculator",
+        "description": "Calculate 401k retirement savings with employer matching and tax benefits",
+        "url": "https://calcfest.com/calculators/401k.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors flex items-center">
+                            Calculators
+                            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="absolute top-full left-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="p-4 grid grid-cols-1 gap-4">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Financial Planning</h3>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/debt-to-income.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Debt-to-Income</a>
+                                        <a href="/calculators/emergency-fund.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Emergency Fund</a>
+                                        <a href="/calculators/compound-interest.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Compound Interest</a>
+                                        <a href="/calculators/401k.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">401k Calculator</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Mortgage & Loans</h3>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/mortgage-payment.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Mortgage Payment</a>
+                                        <a href="/calculators/home-affordability.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Home Affordability</a>
+                                        <a href="/calculators/down-payment-pmi.html" class="block text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Down Payment & PMI</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 dark:border-gray-700 p-4">
+                                <a href="/calculators/" class="text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">View All Calculators →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-4 py-3 space-y-3">
+                <a href="/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">Home</a>
+                <a href="/calculators/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">All Calculators</a>
+                <a href="/about.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">About</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-4 h-12 text-sm">
+                <a href="/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Home</a>
+                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <a href="/calculators/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Calculators</a>
+                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-gray-900 dark:text-white font-medium">401k Calculator</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                401k Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Calculate your 401k retirement savings with employer matching, tax benefits, and detailed projections. 
+                Plan your retirement with confidence and maximize your employer's contribution.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+            <!-- Calculator Input -->
+            <div class="xl:col-span-2">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">401k Parameters</h2>
+                    
+                    <form id="401kForm" class="space-y-6">
+                        <!-- Current Situation -->
+                        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Current Situation</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="currentAge" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Current Age
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="currentAge" name="currentAge" 
+                                               class="w-full pl-4 pr-16 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="30" required>
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">years</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="retirementAge" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Retirement Age
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="retirementAge" name="retirementAge" 
+                                               class="w-full pl-4 pr-16 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="65" required>
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">years</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="currentBalance" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Current 401k Balance
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="currentBalance" name="currentBalance" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="25,000">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="annualSalary" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Annual Salary
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                        <input type="text" id="annualSalary" name="annualSalary" 
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="75,000" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contribution Settings -->
+                        <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Contribution Settings</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="contributionPercent" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Your Contribution
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="contributionPercent" name="contributionPercent" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="10" required>
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Of your annual salary</p>
+                                </div>
+
+                                <div>
+                                    <label for="employerMatch" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Employer Match
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="employerMatch" name="employerMatch" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="3.0">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Employer matches up to this %</p>
+                                </div>
+
+                                <div>
+                                    <label for="matchLimit" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Match Limit
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="matchLimit" name="matchLimit" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="6.0">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">You must contribute this % to get full match</p>
+                                </div>
+
+                                <div>
+                                    <label for="salaryGrowth" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Annual Salary Growth
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="salaryGrowth" name="salaryGrowth" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="3.0">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Investment & Tax Settings -->
+                        <div class="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-6 border border-amber-200 dark:border-amber-800">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Investment & Tax Settings</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="returnRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Expected Annual Return
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="returnRate" name="returnRate" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="7.0" required>
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="currentTaxRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Current Tax Rate
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="currentTaxRate" name="currentTaxRate" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="24">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="retirementTaxRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Retirement Tax Rate
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="retirementTaxRate" name="retirementTaxRate" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="18">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="inflationRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Inflation Rate
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="inflationRate" name="inflationRate" 
+                                               class="w-full pl-4 pr-8 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                               placeholder="3.0">
+                                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl">
+                            Calculate 401k Projection
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="xl:col-span-1">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Retirement Summary</h3>
+                    
+                    <div id="401kResults" class="space-y-6">
+                        <div class="text-center text-gray-500 dark:text-gray-400">
+                            <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                            </svg>
+                            <p>Enter your 401k details to see retirement projections and tax benefits</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Growth Chart -->
+        <div id="chartContainer" class="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">401k Growth Projection</h2>
+                <div class="flex space-x-2">
+                    <button id="totalBtn" class="px-4 py-2 text-sm rounded-lg bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 border border-primary-200 dark:border-primary-700">
+                        Total Value
+                    </button>
+                    <button id="contributionsBtn" class="px-4 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
+                        Contributions Only
+                    </button>
+                </div>
+            </div>
+            <div class="relative h-80">
+                <canvas id="401kChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Contribution Breakdown -->
+        <div id="breakdownContainer" class="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hidden">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Annual Contribution Breakdown</h2>
+            <div class="overflow-x-auto">
+                <table id="contributionTable" class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th class="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">Age</th>
+                            <th class="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Salary</th>
+                            <th class="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Your Contribution</th>
+                            <th class="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Employer Match</th>
+                            <th class="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Account Balance</th>
+                            <th class="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Tax Savings</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contributionBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">401k Planning Guide</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Contribution Limits (2025)</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">Employee Contribution</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                                $23,000 maximum annual contribution for those under 50
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">Catch-up Contribution</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                                Additional $7,500 for those 50 and older (total $30,500)
+                            </p>
+                        </div>
+
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">Total Contribution Limit</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                                $69,000 combined employee + employer contributions (under 50)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Employer Matching Strategies</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white">50% match up to 6%</span>
+                            <span class="text-sm text-green-600 dark:text-green-400">Common</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white">100% match up to 3%</span>
+                            <span class="text-sm text-blue-600 dark:text-blue-400">Generous</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white">25% match up to 8%</span>
+                            <span class="text-sm text-yellow-600 dark:text-yellow-400">Conservative</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white">Dollar-for-dollar to 4%</span>
+                            <span class="text-sm text-green-600 dark:text-green-400">Excellent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-3">💡 401k Optimization Tips</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Maximize Free Money:</h4>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li>• Always contribute enough to get full employer match</li>
+                            <li>• Employer match is 100% immediate return</li>
+                            <li>• Increase contributions with salary raises</li>
+                            <li>• Consider automatic escalation programs</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Tax Strategies:</h4>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li>• Traditional 401k reduces current taxes</li>
+                            <li>• Roth 401k provides tax-free retirement income</li>
+                            <li>• Consider your current vs future tax rates</li>
+                            <li>• Diversify with both traditional and Roth</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-amber-50 dark:bg-amber-900/20 rounded-lg p-6 border border-amber-200 dark:border-amber-800">
+                <h3 class="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-3">⚠️ Important Considerations</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-amber-700 dark:text-amber-300 mb-2">Withdrawal Rules:</h4>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li>• 10% penalty for early withdrawal before 59½</li>
+                            <li>• Required minimum distributions start at 73</li>
+                            <li>• Limited hardship withdrawal options</li>
+                            <li>• Consider loan options vs withdrawal</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-amber-700 dark:text-amber-300 mb-2">Investment Risk:</h4>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                            <li>• Market volatility affects account value</li>
+                            <li>• Diversification is essential</li>
+                            <li>• Review and rebalance regularly</li>
+                            <li>• Consider target-date funds for simplicity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold">Finance CalcFest</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Professional financial calculators for informed decision making. Calculate everything from mortgages to investment returns.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Financial Planning</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/debt-to-income.html" class="text-gray-400 hover:text-white transition-colors">Debt-to-Income</a></li>
+                        <li><a href="/calculators/emergency-fund.html" class="text-gray-400 hover:text-white transition-colors">Emergency Fund</a></li>
+                        <li><a href="/calculators/compound-interest.html" class="text-gray-400 hover:text-white transition-colors">Compound Interest</a></li>
+                        <li><a href="/calculators/401k.html" class="text-gray-400 hover:text-white transition-colors">401k Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/" class="text-gray-400 hover:text-white transition-colors">All Calculators</a></li>
+                        <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 Finance CalcFest. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm mt-2 md:mt-0">
+                        Calculations are estimates. Consult a financial advisor for personalized advice.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/401k.js" defer></script>
+</body>
+</html>

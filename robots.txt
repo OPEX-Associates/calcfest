@@ -1,0 +1,45 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://calcfest.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow development files
+Disallow: /assets/js/*.map
+Disallow: /assets/css/*.map
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /dist/
+Disallow: /*.log
+
+# Allow specific assets
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+Allow: /calculators/
+
+# Social media and AI crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /

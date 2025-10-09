@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - CalcFest</title>
+    <meta name="description" content="CalcFest Terms of Service - Terms and conditions for using our financial calculators and website.">
+    <link rel="canonical" href="https://calcfest.com/terms.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Terms of Service - CalcFest">
+    <meta property="og:description" content="CalcFest Terms of Service - Terms and conditions for using our financial calculators and website.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/terms.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- Fonts & Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors flex items-center">
+                            Calculators
+                            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="absolute top-full left-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="p-4 grid grid-cols-1 gap-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Popular Categories</h4>
+                                    <div class="space-y-1">
+                                        <a href="/calculators/#mortgage-loans" class="block text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">Mortgage & Loans</a>
+                                        <a href="/calculators/#real-estate" class="block text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">Real Estate Investment</a>
+                                        <a href="/calculators/#personal-finance" class="block text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">Financial Planning</a>
+                                        <a href="/calculators/#investment-portfolio" class="block text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">Investment & Portfolio</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 dark:border-gray-700 p-4">
+                                <a href="/calculators/" class="text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">View All Calculators →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-4 py-3 space-y-3">
+                <a href="/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">Home</a>
+                <a href="/calculators/" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">All Calculators</a>
+                <a href="/about.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">About</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div class="p-8">
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                    Terms of Service
+                </h1>
+                
+                <div class="prose prose-gray dark:prose-invert max-w-none">
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        <strong>Effective Date:</strong> October 9, 2025<br>
+                        <strong>Last Updated:</strong> October 9, 2025
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">1. Acceptance of Terms</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        By accessing or using CalcFest (the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you disagree with any part of these terms, then you may not access the Service.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">2. Description of Service</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        CalcFest provides free, web-based financial calculators for educational and informational purposes. Our calculators cover various financial scenarios including mortgages, investments, retirement planning, and business finance.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">3. Use License</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Permission is granted to temporarily access and use CalcFest for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 mb-4 ml-4">
+                        <li>Modify or copy the materials</li>
+                        <li>Use the materials for any commercial purpose or for any public display</li>
+                        <li>Attempt to reverse engineer any software contained on the website</li>
+                        <li>Remove any copyright or other proprietary notations from the materials</li>
+                    </ul>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">4. Educational Purpose and Disclaimer</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        <strong>Important:</strong> The calculators and information provided on CalcFest are for educational and informational purposes only. They are not intended to provide professional financial, investment, tax, or legal advice.
+                    </p>
+                    <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-medium text-amber-900 dark:text-amber-200 mb-2">
+                            Financial Disclaimer
+                        </h3>
+                        <ul class="list-disc list-inside text-amber-800 dark:text-amber-300 space-y-1">
+                            <li><strong>Not Financial Advice:</strong> Results are estimates and should not be considered professional financial advice</li>
+                            <li><strong>Consult Professionals:</strong> Always consult with qualified financial advisors for important financial decisions</li>
+                            <li><strong>Accuracy Not Guaranteed:</strong> While we strive for accuracy, we cannot guarantee the precision of all calculations</li>
+                            <li><strong>Your Responsibility:</strong> You are responsible for verifying all calculations and their appropriateness for your situation</li>
+                        </ul>
+                    </div>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">5. Accuracy and Reliability</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        While we strive to provide accurate calculators, we make no warranties, expressed or implied, regarding the accuracy, reliability, or completeness of the calculations or results. You acknowledge that:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 mb-4 ml-4">
+                        <li>Calculations are estimates based on the information you provide</li>
+                        <li>Actual results may vary due to factors not considered in the calculations</li>
+                        <li>You should verify all calculations independently</li>
+                        <li>Professional advice should be sought for important financial decisions</li>
+                    </ul>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">6. User Responsibilities</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        As a user of CalcFest, you agree to:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 mb-4 ml-4">
+                        <li>Use the Service only for lawful purposes</li>
+                        <li>Not attempt to harm or compromise the security of the website</li>
+                        <li>Not use automated systems to access the Service excessively</li>
+                        <li>Respect intellectual property rights</li>
+                        <li>Not redistribute or republish our content without permission</li>
+                    </ul>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">7. Intellectual Property</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        The Service and its original content, features, and functionality are and will remain the exclusive property of CalcFest. The Service is protected by copyright, trademark, and other laws.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">8. Limitation of Liability</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        In no event shall CalcFest, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your use of the Service.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">9. Disclaimer of Warranties</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        The information on this website is provided on an "as is" basis. To the fullest extent permitted by law, CalcFest excludes all representations, warranties, or other terms which might have effect between us or be implied or incorporated into these Terms.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">10. Service Availability</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        We reserve the right to withdraw or amend our Service, and any service or material we provide on the website, in our sole discretion without notice. We will not be liable if for any reason all or any part of the Service is unavailable at any time or for any period.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">11. Modifications to Terms</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days notice prior to any new terms taking effect.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">12. Third-Party Links</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Our Service may contain links to third-party websites or services that are not owned or controlled by CalcFest. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">13. Governing Law</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        These Terms shall be interpreted and governed by the laws of the jurisdiction in which CalcFest operates, without regard to its conflict of law provisions.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">14. Contact Information</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        If you have any questions about these Terms of Service, please contact us through the information provided on our website.
+                    </p>
+
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">15. Severability</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions will remain in effect. These Terms constitute the entire agreement between us regarding our Service.
+                    </p>
+
+                    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 mt-8">
+                        <h3 class="text-lg font-medium text-red-900 dark:text-red-200 mb-2">
+                            Important Reminders
+                        </h3>
+                        <ul class="list-disc list-inside text-red-800 dark:text-red-300 space-y-1">
+                            <li><strong>Educational Use Only:</strong> Our calculators are for educational purposes only</li>
+                            <li><strong>No Financial Advice:</strong> We do not provide professional financial advice</li>
+                            <li><strong>Verify Results:</strong> Always verify calculations independently</li>
+                            <li><strong>Consult Experts:</strong> Seek professional advice for important financial decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold">Finance CalcFest</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Professional financial calculators for informed decision making.
+                        Expert tools for mortgages, real estate investment, and financial planning.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Popular Calculators</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/mortgage-payment.html" class="text-gray-400 hover:text-white transition-colors">Mortgage Payment</a></li>
+                        <li><a href="/calculators/home-affordability.html" class="text-gray-400 hover:text-white transition-colors">Home Affordability</a></li>
+                        <li><a href="/calculators/cash-flow.html" class="text-gray-400 hover:text-white transition-colors">Property Cash Flow</a></li>
+                        <li><a href="/calculators/refinance.html" class="text-gray-400 hover:text-white transition-colors">Refinance Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/calculators/" class="text-gray-400 hover:text-white transition-colors">All Calculators</a></li>
+                        <li><a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 Finance CalcFest. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm mt-2 md:mt-0">
+                        Calculations are for educational purposes only. Consult a financial advisor for personalized advice.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

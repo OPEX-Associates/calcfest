@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refinance Calculator - Should You Refinance Your Mortgage? | Finance CalcFest</title>
+    <meta name="description" content="Calculate potential savings from refinancing your mortgage. Compare costs, break-even time, and monthly payment differences for informed refinancing decisions.">
+    <link rel="canonical" href="https://calcfest.com/calculators/refinance.html">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Refinance Calculator - Mortgage Refinancing Analysis">
+    <meta property="og:description" content="Determine if refinancing your mortgage will save you money with our comprehensive analysis tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcfest.com/calculators/refinance.html">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Calculator",
+        "name": "Refinance Calculator",
+        "description": "Calculate potential savings and break-even analysis for mortgage refinancing",
+        "url": "https://calcfest.com/calculators/refinance.html",
+        "applicationCategory": "FinanceApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "Finance CalcFest"
+        }
+    }
+    </script>
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        accent: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- Fallback styles to ensure input borders are visible -->
+    <style>
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db !important;
+            border-radius: 0.5rem;
+            background-color: white;
+            color: #111827;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Force consistent dark mode support */
+        .dark .input-field,
+        html.dark .input-field,
+        [data-theme="dark"] .input-field {
+            background-color: #374151 !important;
+            border-color: #4b5563 !important;
+            color: white !important;
+        }
+        
+        .dark .input-field:focus,
+        html.dark .input-field:focus,
+        [data-theme="dark"] .input-field:focus {
+            border-color: #60a5fa !important;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        }
+
+        .dark .input-label,
+        html.dark .input-label,
+        [data-theme="dark"] .input-label {
+            color: #d1d5db !important;
+        }
+
+        /* Ensure select elements also get proper styling */
+        select.input-field {
+            cursor: pointer;
+        }
+
+        /* Improve placeholder text visibility */
+        .input-field::placeholder {
+            color: #9ca3af;
+        }
+
+        .dark .input-field::placeholder,
+        html.dark .input-field::placeholder,
+        [data-theme="dark"] .input-field::placeholder {
+            color: #6b7280 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Finance CalcFest</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
+                    <a href="/calculators/" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">Calculators</a>
+                    <a href="/about.html" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">About</a>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-300">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <a href="/calculators/" class="ml-1 text-sm font-medium text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-300 md:ml-2">Calculators</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <span class="ml-1 text-sm font-medium text-gray-500 dark:text-gray-500 md:ml-2">Refinance Calculator</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Refinance Calculator
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Calculate potential savings from refinancing your mortgage. Compare costs, break-even time, and total savings to make an informed refinancing decision.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Calculator Form -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <form id="refinanceForm" data-calculator="refinance" class="space-y-6">
+                    <!-- Current Loan Details -->
+                    <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Current Loan Details</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="currentBalance" class="input-label">Current Loan Balance</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                    <input type="number" id="currentBalance" name="currentBalance" 
+                                           class="input-field pl-8" 
+                                           placeholder="250,000" 
+                                           value="250000"
+                                           min="1000" 
+                                           max="50000000" 
+                                           step="1000" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="currentRate" class="input-label">Current Interest Rate (%)</label>
+                                <div class="relative">
+                                    <input type="number" id="currentRate" name="currentRate" 
+                                           class="input-field pr-8" 
+                                           placeholder="7.25" 
+                                           value="7.25"
+                                           min="0" 
+                                           max="50" 
+                                           step="0.001" required>
+                                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="remainingYears" class="input-label">Remaining Years on Current Loan</label>
+                                <input type="number" id="remainingYears" name="remainingYears" 
+                                       class="input-field" 
+                                       placeholder="27" 
+                                       value="27"
+                                       min="1" 
+                                       max="40" 
+                                       step="1" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Loan Details -->
+                    <div class="pb-6">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4">New Loan Details</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="newRate" class="input-label">New Interest Rate (%)</label>
+                                <div class="relative">
+                                    <input type="number" id="newRate" name="newRate" 
+                                           class="input-field pr-8" 
+                                           placeholder="6.25" 
+                                           value="6.25"
+                                           min="0" 
+                                           max="50" 
+                                           step="0.001" required>
+                                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">%</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="newLoanTerm" class="input-label">New Loan Term</label>
+                                <select id="newLoanTerm" name="newLoanTerm" class="input-field" required>
+                                    <option value="30">30 years</option>
+                                    <option value="25">25 years</option>
+                                    <option value="20">20 years</option>
+                                    <option value="15">15 years</option>
+                                    <option value="10">10 years</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="closingCosts" class="input-label">Refinancing Costs</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                    <input type="number" id="closingCosts" name="closingCosts" 
+                                           class="input-field pl-8" 
+                                           placeholder="3,500" 
+                                           value="3500"
+                                           min="0" 
+                                           max="999999" 
+                                           step="100">
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                    Include all closing costs, fees, and points
+                                </p>
+                            </div>
+
+                            <div>
+                                <label for="cashOut" class="input-label">Cash Out Amount (Optional)</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">$</span>
+                                    <input type="number" id="cashOut" name="cashOut" 
+                                           class="input-field pl-8" 
+                                           placeholder="0" 
+                                           value="0"
+                                           min="0" 
+                                           max="9999999" 
+                                           step="1000">
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                    Additional amount borrowed for cash out refinance
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50">
+                        Calculate Refinance Savings
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Refinance Analysis</h2>
+                
+                <div id="results" class="space-y-6">
+                    <!-- Recommendation -->
+                    <div class="text-center p-4 rounded-lg" id="recommendationDisplay">
+                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Recommendation</div>
+                        <div id="recommendation" class="text-2xl font-bold text-primary-600 dark:text-primary-400">Calculating...</div>
+                        <div id="reasonText" class="text-sm text-gray-900 dark:text-white mt-1">-</div>
+                    </div>
+
+                    <!-- Monthly Payment Comparison -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Monthly Payment Comparison</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Current Payment</span>
+                                <span id="currentPayment" class="text-lg font-bold text-red-600 dark:text-red-400">$1,799</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">New Payment</span>
+                                <span id="newPayment" class="text-lg font-bold text-green-600 dark:text-green-400">$1,599</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center border-t border-gray-200 dark:border-gray-700 pt-3">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Monthly Savings</span>
+                                <span id="monthlySavings" class="text-xl font-bold text-green-600 dark:text-green-400">$200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Break-even Analysis -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Break-even Analysis</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Break-even Time</span>
+                                <span id="breakEvenTime" class="text-lg font-bold text-accent-600 dark:text-accent-400">18 months</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Closing Costs</span>
+                                <span id="totalClosingCosts" class="text-lg font-bold text-gray-900 dark:text-white">$3,500</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Long-term Savings -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Total Savings</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Interest Saved</span>
+                                <span id="interestSaved" class="text-lg font-bold text-green-600 dark:text-green-400">$45,000</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Net Savings (After Costs)</span>
+                                <span id="netSavings" class="text-xl font-bold text-green-600 dark:text-green-400">$41,500</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Lifetime Savings</span>
+                                <span id="lifetimeSavings" class="text-lg font-bold text-gray-900 dark:text-white">$65,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Stats -->
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                        <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">Key Statistics</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Rate Reduction:</span>
+                                <span id="rateReduction" class="font-medium text-gray-900 dark:text-white">1.00%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">New Loan Amount:</span>
+                                <span id="newLoanAmount" class="font-medium text-gray-900 dark:text-white">$253,500</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Time to Recoup Costs:</span>
+                                <span id="recoupTime" class="font-medium text-gray-900 dark:text-white">18 months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <button id="exportAnalysis" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-semibold py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 text-sm">
+                        Export Analysis
+                    </button>
+                    <button id="shareResults" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-semibold py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 text-sm">
+                        Share Results
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Cost Breakdown -->
+        <div class="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Cost-Benefit Analysis</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Benefits -->
+                <div>
+                    <h3 class="text-lg font-semibold text-green-700 dark:text-green-400 mb-4">Benefits of Refinancing</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Monthly Payment Savings</span>
+                            <span id="benefitMonthlyPayment" class="text-sm font-medium text-green-600 dark:text-green-400">$200/month</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Total Interest Savings</span>
+                            <span id="benefitInterestSavings" class="text-sm font-medium text-green-600 dark:text-green-400">$45,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Rate Improvement</span>
+                            <span id="benefitRateImprovement" class="text-sm font-medium text-green-600 dark:text-green-400">1.00%</span>
+                        </div>
+                        <div class="flex justify-between border-t border-gray-200 dark:border-gray-700 pt-3">
+                            <span class="text-sm font-semibold text-gray-900 dark:text-white">Total Benefits</span>
+                            <span id="totalBenefits" class="text-sm font-bold text-green-600 dark:text-green-400">$45,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Costs -->
+                <div>
+                    <h3 class="text-lg font-semibold text-red-700 dark:text-red-400 mb-4">Costs of Refinancing</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Closing Costs</span>
+                            <span id="costClosingCosts" class="text-sm font-medium text-red-600 dark:text-red-400">$3,500</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Additional Interest (Term Extension)</span>
+                            <span id="costAdditionalInterest" class="text-sm font-medium text-red-600 dark:text-red-400">$0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Opportunity Cost</span>
+                            <span id="costOpportunity" class="text-sm font-medium text-red-600 dark:text-red-400">$0</span>
+                        </div>
+                        <div class="flex justify-between border-t border-gray-200 dark:border-gray-700 pt-3">
+                            <span class="text-sm font-semibold text-gray-900 dark:text-white">Total Costs</span>
+                            <span id="totalCosts" class="text-sm font-bold text-red-600 dark:text-red-400">$3,500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-blue-50 dark:bg-blue-900 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-blue-900 dark:text-blue-100 mb-4">When to Refinance</h3>
+                <ul class="space-y-2 text-blue-800 dark:text-blue-200">
+                    <li>• Interest rates have dropped significantly</li>
+                    <li>• Your credit score has improved</li>
+                    <li>• You want to switch loan types (ARM to fixed)</li>
+                    <li>• You need to remove PMI</li>
+                    <li>• You want to access home equity (cash-out)</li>
+                    <li>• You plan to stay in the home long-term</li>
+                </ul>
+            </div>
+            
+            <div class="bg-yellow-50 dark:bg-yellow-900 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-yellow-900 dark:text-yellow-100 mb-4">Refinancing Considerations</h3>
+                <ul class="space-y-2 text-yellow-800 dark:text-yellow-200">
+                    <li>• Factor in all closing costs and fees</li>
+                    <li>• Consider break-even time vs. how long you'll stay</li>
+                    <li>• Evaluate total interest over loan life</li>
+                    <li>• Don't restart the clock unless beneficial</li>
+                    <li>• Compare multiple lender offers</li>
+                    <li>• Consider current vs. new loan term impact</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Related Calculators -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Related Calculators</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="/calculators/mortgage-payment.html" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Mortgage Payment</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Calculate your monthly mortgage payment including PITI.</p>
+                </a>
+                <a href="/calculators/amortization.html" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Amortization Schedule</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">View detailed loan payment breakdown over time.</p>
+                </a>
+                <a href="/calculators/home-affordability.html" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Home Affordability</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Determine how much house you can afford.</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">FC</span>
+                    </div>
+                    <span class="text-xl font-bold">Finance CalcFest</span>
+                </div>
+                <p class="text-gray-400 mb-4">Professional financial calculators for informed decision making.</p>
+                <p class="text-gray-500 text-sm">© 2025 Finance CalcFest. All rights reserved. Calculations are for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/refinance.js" defer></script>
+</body>
+</html>
