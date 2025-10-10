@@ -203,6 +203,9 @@
         </div>
     </header>
 
+    <!-- Top of Page Ad -->
+    <div id="ezoic-pub-ad-placeholder-101"></div>
+
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Breadcrumb -->
@@ -238,9 +241,15 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Calculator Form -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <!-- Under Page Title Ad -->
+        <div id="ezoic-pub-ad-placeholder-102"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Main Content Area (3 columns) -->
+            <div class="lg:col-span-3">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Calculator Form -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                 <form id="amortizationForm" data-calculator="amortization" class="space-y-6">
                     <div>
                         <label for="loanAmount" class="input-label">Loan Amount</label>
@@ -364,7 +373,26 @@
                     </button>
                 </div>
             </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="space-y-6 sticky top-8">
+                    <!-- Sidebar Ad 1 -->
+                    <div id="ezoic-pub-ad-placeholder-104"></div>
+                    
+                    <!-- Sidebar Ad 2 -->
+                    <div id="ezoic-pub-ad-placeholder-105"></div>
+                    
+                    <!-- Sidebar Ad 3 -->
+                    <div id="ezoic-pub-ad-placeholder-106"></div>
+                </div>
+            </div>
         </div>
+
+        <!-- Under First Paragraph Ad -->
+        <div id="ezoic-pub-ad-placeholder-109"></div>
 
         <!-- Amortization Schedule Table -->
         <div id="scheduleContainer" class="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
@@ -415,6 +443,9 @@
             </div>
         </div>
 
+        <!-- Mid Content Ad -->
+        <div id="ezoic-pub-ad-placeholder-111"></div>
+
         <!-- Educational Content -->
         <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-blue-50 dark:bg-blue-900 rounded-lg p-6">
@@ -459,6 +490,9 @@
             </div>
         </div>
     </main>
+
+    <!-- Bottom of Page Ad -->
+    <div id="ezoic-pub-ad-placeholder-103"></div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
@@ -523,5 +557,12 @@
     <!-- Scripts -->
     <script src="/assets/js/main.js" defer></script>
     <script src="/assets/js/amortization.js" defer></script>
+    
+    <!-- Ezoic Ad Initialization -->
+    <script>
+        ezstandalone.cmd.push(function () {
+            ezstandalone.showAds(101, 102, 104, 105, 106, 109, 111, 103);
+        });
+    </script>
 </body>
 </html>
