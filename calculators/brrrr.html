@@ -91,6 +91,15 @@
         }
     }
     </script>
+<script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false"></script>
+<script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false"></script>
+
+<script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+<script>
+    window.ezstandalone = window.ezstandalone || {};
+    ezstandalone.cmd = ezstandalone.cmd || [];
+</script>
+
 </head>
 <body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
     <!-- Header -->
@@ -512,43 +521,50 @@
             </div>
         </div>
     </main>
-
     <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-sm">FC</span>
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">FC</span>
                         </div>
-                        <span class="font-bold text-xl text-gray-900 dark:text-white">Finance CalcFest</span>
+                        <span class="text-xl font-bold">Finance CalcFest</span>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">
-                        Professional financial calculators for smart investment decisions. Free, accurate, and easy to use.
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Professional financial calculators for informed decision making. Calculate everything from mortgages to investment returns.
                     </p>
                 </div>
+                
                 <div>
-                    <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Calculators</h3>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                        <li><a href="/calculators/mortgage-payment.html" class="hover:text-primary-600 dark:hover:text-primary-400">Mortgage Payment</a></li>
-                        <li><a href="/calculators/home-affordability.html" class="hover:text-primary-600 dark:hover:text-primary-400">Home Affordability</a></li>
-                        <li><a href="/calculators/cash-flow.html" class="hover:text-primary-600 dark:hover:text-primary-400">Cash Flow</a></li>
-                        <li><a href="/calculators/cap-rate.html" class="hover:text-primary-600 dark:hover:text-primary-400">Cap Rate</a></li>
-                        <li><a href="/calculators/brrrr.html" class="hover:text-primary-600 dark:hover:text-primary-400">BRRRR Strategy</a></li>
+                    <h3 class="text-lg font-semibold mb-4">Mortgage Calculators</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/mortgage-payment.html" class="text-gray-400 hover:text-white transition-colors">Mortgage Payment</a></li>
+                        <li><a href="/calculators/biweekly-mortgage.html" class="text-gray-400 hover:text-white transition-colors">Biweekly Mortgage</a></li>
+                        <li><a href="/calculators/home-affordability.html" class="text-gray-400 hover:text-white transition-colors">Home Affordability</a></li>
+                        <li><a href="/calculators/amortization-schedule.html" class="text-gray-400 hover:text-white transition-colors">Amortization Schedule</a></li>
                     </ul>
                 </div>
+                
                 <div>
-                    <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Resources</h3>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                        <li><a href="/about.html" class="hover:text-primary-600 dark:hover:text-primary-400">About</a></li>
-                        <li><a href="/contact.html" class="hover:text-primary-600 dark:hover:text-primary-400">Contact</a></li>
-                        <li><a href="/privacy.html" class="hover:text-primary-600 dark:hover:text-primary-400">Privacy Policy</a></li>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/calculators/" class="text-gray-400 hover:text-white transition-colors">All Calculators</a></li>
+                        <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center text-gray-600 dark:text-gray-300">
-                <p>&copy; 2024 Finance CalcFest. All rights reserved.</p>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 Finance CalcFest. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm mt-2 md:mt-0">
+                        Calculations are estimates. Consult a financial advisor for personalized advice.
+                    </p>
+                </div>
             </div>
         </div>
     </footer>
