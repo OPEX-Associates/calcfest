@@ -1,7 +1,0 @@
-#Ads.txt calcfest.com
-
-ezoic.ai, caa9444915cf71ef7e21d9c48c6eb377, DIRECT
-ezoic.co.uk, caa9444915cf71ef7e21d9c48c6eb377, DIRECT
-
-google.com, pub-3384158839006881, DIRECT, f08c47fec0942fa0
-google.com, pub-3384158839006881, RESELLER, f08c47fec0942fa0
