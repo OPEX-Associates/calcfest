@@ -27,6 +27,44 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://calcfest.com/calculators/cap-rate.html">
     
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' },
+                        accent: { 500: '#10b981', 600: '#059669' }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <!-- Enhanced Input Styles -->
+    <style>
+        .input-field { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db !important; border-radius: 0.5rem; background-color: white; color: #111827; font-size: 1rem; transition: all 0.2s ease; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .input-field:focus { outline: none; border-color: #3b82f6 !important; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .input-label { display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 0.5rem; }
+        input[type="number"], input[type="text"], input[type="range"], select { border: 1px solid #d1d5db !important; }
+        .dark input[type="number"], .dark input[type="text"], .dark input[type="range"], .dark select, html.dark input[type="number"], html.dark input[type="text"], html.dark select { border: 1px solid #6b7280 !important; background-color: #374151 !important; color: #f9fafb !important; }
+        input[type="number"]:focus, input[type="text"]:focus, input[type="range"]:focus, select:focus { border-color: #3b82f6 !important; outline: none !important; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important; }
+        .dark input[type="number"]:focus, .dark input[type="text"]:focus, .dark input[type="range"]:focus, .dark select:focus, html.dark input[type="number"]:focus, html.dark input[type="text"]:focus, html.dark select:focus { border-color: #60a5fa !important; box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1) !important; }
+        .dark .input-field, html.dark .input-field { background-color: #374151 !important; border-color: #4b5563 !important; color: white !important; }
+        .dark .input-field:focus, html.dark .input-field:focus { border-color: #60a5fa !important; box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1); }
+        .dark .input-label, html.dark .input-label { color: #d1d5db !important; }
+        .input-field::placeholder { color: #9ca3af; }
+        .dark .input-field::placeholder, html.dark .input-field::placeholder { color: #6b7280 !important; }
+        select.input-field, select { cursor: pointer; }
+        .result-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .result-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1); }
+    </style>
+    
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
     {
