@@ -4,6 +4,7 @@
     <!-- Homepage -->
     <url>
         <loc>https://calcfest.com/</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -11,6 +12,7 @@
     <!-- Calculator Index -->
     <url>
         <loc>https://calcfest.com/calculators/</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -18,68 +20,81 @@
     <!-- Static Pages -->
     <url>
         <loc>https://calcfest.com/about.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://calcfest.com/privacy.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://calcfest.com/terms.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
 
-    <!-- Mortgage & Loan Calculators -->
+    <!-- Mortgage & Loan Calculators (High Priority) -->
     <url>
         <loc>https://calcfest.com/calculators/mortgage-payment.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://calcfest.com/calculators/biweekly-mortgage.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://calcfest.com/calculators/extra-payment.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://calcfest.com/calculators/15-vs-30-mortgage.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://calcfest.com/calculators/down-payment-pmi.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
         <loc>https://calcfest.com/calculators/home-affordability.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/rent-vs-buy.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/refinance.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/amortization.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/amortization-schedule.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://calcfest.com/calculators/biweekly-mortgage.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://calcfest.com/calculators/extra-payment.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://calcfest.com/calculators/15-vs-30-mortgage.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://calcfest.com/calculators/down-payment-pmi.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -87,21 +102,25 @@
     <!-- Real Estate Investment Calculators -->
     <url>
         <loc>https://calcfest.com/calculators/cash-flow.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/cap-rate.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/brrrr.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/fix-flip.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -109,11 +128,13 @@
     <!-- Personal Finance Calculators -->
     <url>
         <loc>https://calcfest.com/calculators/debt-to-income.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/emergency-fund.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -121,45 +142,53 @@
     <!-- Retirement & Savings Calculators -->
     <url>
         <loc>https://calcfest.com/calculators/401k.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/compound-interest.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/retirement-planning.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
     </url>
 
     <!-- Investment & Portfolio Calculators -->
     <url>
         <loc>https://calcfest.com/calculators/portfolio-allocation.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/capm.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://calcfest.com/calculators/dividend-yield.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://calcfest.com/calculators/stock-valuation.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://calcfest.com/calculators/risk-assessment.html</loc>
+        <loc>https://calcfest.com/calculators/stock-valuation.html</loc>
+        <lastmod>2025-12-26</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://calcfest.com/calculators/risk-assessment.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 
 </urlset>

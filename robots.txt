@@ -4,8 +4,8 @@ Allow: /
 # Sitemap
 Sitemap: https://calcfest.com/sitemap.xml
 
-# Crawl-delay
-Crawl-delay: 1
+# No crawl-delay for major search engines (they manage their own rate)
+# Crawl-delay: 1 - Removed as it can slow indexing
 
 # Disallow development files
 Disallow: /assets/js/*.map
@@ -15,12 +15,25 @@ Disallow: /node_modules/
 Disallow: /src/
 Disallow: /dist/
 Disallow: /*.log
+Disallow: /project.md
+Disallow: /ROADMAP.md
 
 # Allow specific assets
 Allow: /assets/css/
 Allow: /assets/js/
 Allow: /assets/images/
 Allow: /calculators/
+
+# Googlebot-specific (helps AdSense)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+
+User-agent: AdsBot-Google
+Allow: /
 
 # Social media and AI crawlers
 User-agent: facebookexternalhit
